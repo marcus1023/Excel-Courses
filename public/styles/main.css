@@ -1,0 +1,213 @@
+body{
+  font-size: 14px;
+}
+h1{
+  font-size: 6rem;
+  margin: 60px 0 0 0;
+}
+h2{
+  font-size: 2rem;
+  margin:  0;
+}
+/*Jquery classes*/
+.white{
+  background:
+}
+.home-page-widgets{
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.widget-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.widget-container div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items : center;
+  margin: 80px 40px 40px 40px;
+  border: 1px solid black;
+  padding: 10px;
+  width: 250px;
+  min-height: 250px;
+}
+.widget-container div h2{
+  font-size: 2.5rem;
+  margin: 10px;
+}
+.widget-container div p{
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+}
+.widget-container div button{
+  text-align: center;
+  margin: 0 0 10px 0;
+  background: #52B529;
+  border: 2px solid #52B529;
+  color: white;
+}
+.widget-container div button:hover{
+  text-align: center;
+  margin: 0 0 10px 0;
+  background: white;
+  border: 2px solid #52B529;
+  color: #52B529;
+}
+/*Early Bird Section*/
+.grey-bg{
+  background: #e3e3e3;
+}
+.timer-container{
+  position: absolute;
+  top: 40%;
+  left: 3%;
+  width: 50%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: rgba(255,255,255, .5)
+}
+.timer-container h2{
+  color: black;
+  font-size: 5rem;
+  margin: -10px 0 0 0px;
+  padding: 0px;
+}
+#early-bird-counter {
+  color: black;
+  font-size: 9rem;
+  margin: 10px;
+  padding: 0px;
+}
+.timer-container p{
+  color: black;
+  margin: 0px;
+  padding: 0px;
+  font-size: 2.2rem;
+}
+.timer-container p:first-child{
+  margin: 10px 2px 2px 2px ;
+  padding: 0px;
+}
+.early-bird-cta{
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  background: #52B529;;
+  color: white;
+  padding: 10px 30px;
+  font-size: 3rem;
+  border: 4px solid white;
+  border-radius: 2px;
+}
+.early-bird-cta:hover{
+  background: white;
+  color: #52B529;
+}
+.early-bird h1{
+  margin: 30px 0 3px 0;
+}
+/*Image Control*/
+.early-bird{
+  position: relative;
+  color: white;
+  background: url('../img/robin-bird-on-branch-in-the-garden.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+#icon-experiance{
+  background: url('../img/excel-icon.png');
+  background-position: center;
+  background-size: cover;
+}
+#icon-money{
+  background: url('../img/dollar-icon.png');
+  background-position: center;
+  background-size: cover;
+}
+#icon-group{
+  background: url('../img/people-icon.png');
+  background-position: center;
+  background-size: cover;
+}
+
+/*home page about section*/
+
+
+.home-page-about{
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-page-about p{
+  margin: 50px 0px 0px 0;
+  font-size: 2.8rem;
+  letter-spacing: .2rem;
+}
+.home-page-about h1{
+  margin: -5px 0 0 0;
+}
+.home-why-choose{
+  display: flex;
+  position: relative;
+  margin: 10px 0 0 0 ;
+  min-height: 400px;
+  width: 80%;
+}
+.why-choose-content{
+ width: 60%;
+}
+.why-choose-content h2{
+color: #164702;
+font-size: 2.5rem;
+margin: 25px 0 0 0;
+transition: all .8s;
+}
+.why-choose-content h2:first-child{
+margin: 40px 0 0 0;
+}
+.why-choose-content h2:hover{
+  color: #52b529;
+}
+.why-choose-content p{
+margin: 0 0 0 5px;
+font-size: 1.6rem;
+letter-spacing: normal;
+}
+.why-choose-content span{
+letter-spacing: .1rem;
+color: rgba(0,0,0, .4);
+transition: all 1s;
+}
+.why-choose-content span:hover{
+color: rgba(0,0,0, 1)
+}
+.why-choose-widgets{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 30%;
+  height: 430px;
+  margin: 10px 0 0 0;
+}
+.why-choose-widgets div{
+  width: 150px;
+  height: 150px;
+  background: #52b529;
+  border-radius: 50%;
+  margin: 10px;
+}
