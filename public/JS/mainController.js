@@ -1,14 +1,6 @@
 angular.module('excelCourses').controller('mainController', function(mainService, $scope, $interval, $state){
 
 
-
-/*$scope.$on('$stateChangeSuccess', function(){
-  if($state.current.name === "home"){
-  console.log('got in if',$state.current.name );
-    $("#nav-home").css( "color", "red" );
-  }
-});*/
-
 $scope.earlyBirdTimerM = 60
 $scope.earlyBirdTimerS = 1
 $scope.earlyBirdTimerZ;

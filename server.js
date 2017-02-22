@@ -2,15 +2,14 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-/*var config = require('./config.js');*/
-/*var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;*/
+var config = require('./config.js');
 var passport = require('passport');
 var massive = require('massive');
-/*var connectionString = `postgres://${config.postgresUser}:${config.postgresPass}@localhost/devdiscover`;*/
-/*var massiveInstance = massive.connectSync({connectionString : connectionString})*/
+var connect = massive.connectSync({connectionString: config.connectionString});
+var massiveInstance = massive.connectSync({connectionString : config.connectionString})
 var app = module.exports = express();
 
-/*app.set('db', massiveInstance);*/
+app.set('db', connect);
 var db = app.get('db');
 
 var corsOptions = {
