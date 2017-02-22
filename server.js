@@ -5,11 +5,15 @@ var cors = require('cors');
 var config = require('./config.js');
 var passport = require('passport');
 var massive = require('massive');
-var connect = massive.connectSync({connectionString: config.connectionString});
+/*var connect = massive.connectSync({connectionString: config.connectionString});*/
 var massiveInstance = massive.connectSync({connectionString : config.connectionString})
 var app = module.exports = express();
 
-app.set('db', connect);
+
+//DB controllers required
+let usersCtlr = require('./controllers/users.js') ;
+
+app.set('db', massiveInstance);
 var db = app.get('db');
 
 var corsOptions = {
@@ -23,16 +27,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-/*app.use(session({
-	secret: config.sessionSecret,
-	resave: true,
-	saveUninitialized: false,
-	cookie: {
-		maxAge:(1000*60*60*24*7)
-	}
-}));*/
+// system API routes
+	app.post('/api/createNewUser', usersCtlr.createNewUser);
 
-// linkedin Oauth -
+
 
 
 

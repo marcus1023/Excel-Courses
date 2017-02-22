@@ -211,3 +211,20 @@ color: rgba(0,0,0, 1)
   border-radius: 50%;
   margin: 10px;
 }
+/*CMS system CSS*/
+.CMS-Wrapper{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.pip-CMS{
+  display: inline-block;
+  width:70%;
+  height: auto;
+}
+.edit-CMS{
+  display: inline-block;
+  width:20%;
+  height: auto;
+}

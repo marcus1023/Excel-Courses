@@ -1,11 +1,19 @@
 angular.module('excelCourses').controller('mainController', function(mainService, $scope, $interval, $state){
 
 
+$scope.testingToDB = function(){
+  let data = {name: "jimmy", email: "james@collufloweer.cam"}
+  mainService.testingToDB(data).then(function(res){
+    console.log("there and back", res.data)
+  })
+}
+
 $scope.earlyBirdTimerM = 60
 $scope.earlyBirdTimerS = 1
 $scope.earlyBirdTimerZ;
 
   $interval(function(){
+
     if($scope.earlyBirdTimerS > 0){
       $scope.earlyBirdTimerS -= 1
       if($scope.earlyBirdTimerS < 10 && $scope.earlyBirdTimerS > 0){
@@ -24,6 +32,21 @@ $scope.earlyBirdTimerZ;
       }
     }
   }, 2000);
+
+
+
+$scope.createNewUser = function(newUser){
+  mainService.createNewUser(newUser).then(function(res){
+
+    });
+}
+
+
+
+
+
+
+
 
 
   })

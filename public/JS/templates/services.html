@@ -1,2 +1,18 @@
 <main-head></main-head>
-services
+create user account<br>
+<input type="text" placeholder="fullname" ng-model="newUser.fullName">
+<input type="text" placeholder="email" ng-model="newUser.email">
+<input type="text" placeholder="account type" ng-model="newUser.type">
+<input type="submit" placeholder="account type" ng-click="createNewUser(newUser)">
+<br>
+<section class="CMS-Wrapper">
+  <div class="pip-CMS">
+    <ui-view>
+    </ui-view>
+
+  </div>
+  <div class="edit-CMS">
+    <input type="text" >
+
+  </div>
+</section>
