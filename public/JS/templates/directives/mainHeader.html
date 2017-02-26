@@ -1,11 +1,20 @@
 <div class="headerSpacer"></div>
-<header class="nav-bar">
+<header class="nav-bar" style="z-index: 2;">
   <img ui-sref="home" src="./img/excelinfinity-logo-new.png">
   <ul>
     <li ui-sref="home" id="nav-home">{{headHighlight}} Home</li>
     <li ui-sref="services">Services</li>
     <li ui-sref="excelTips">Excel Tips</li>
-    <li>About</li>
-    <li>Sign in</li>
+    <li class="dropdown-li" ng-click="triggerDropdown('about')">About
+      <div id="about-dd">
+        <ul>
+          <li ui-sref="about">About Us</li>
+          <li ui-sref="testimonials">Testimonials</li>
+          <li ui-sref="contact">contact</li>
+        </ul>
+      </div>
+    </li>
+    <li ui-sref="signin" ng-hide="currentUser.type === 'admin'"> Sign in</li>
+    <li ui-sref="adminTools" ng-hide="!currentUser.type"> Admin Tools</li>
   </ul>
 </header>

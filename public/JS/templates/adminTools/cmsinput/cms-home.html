@@ -1,0 +1,15 @@
+<div ng-repeat="section in cms.home.sections" class="cms-inputs">
+  <h4 class="cms-tag">{{section.section}}</h4>
+  <div ng-repeat="input in section" ng-if="input[0] !== 'object'">
+    <textarea >{{input}}</textarea>
+  </div>
+  <div ng-repeat="widget in section.widgets" ng-if="widget !== 'object'">
+      <div ng-repeat="single in widget" ng-if="widget !== 'object'">
+          <h5>widget</h5>
+          <textarea >{{single.title}}</textarea>
+          <textarea >{{single.body}}</textarea>
+          <input ng-model="newcms.title"  />
+          <input ng-model="newcms.body"  />
+      </div>
+  </div>
+</div>

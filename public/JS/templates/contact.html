@@ -1,0 +1,34 @@
+<section class="contact-wrap">
+  <section class="contact-page contact-bg">
+    <div class="overlay-contact">
+      <div>
+        <h1>Get in touch!</h1>
+        <h2>Suggestions? Comments? Questions? We have the answers!</h2>
+      </div>
+    </div>
+  </section>
+  <section class="contact-page">
+    <div id="contact-box">
+      <h2>Contact us</h2>
+      <div>
+        <h3>Email: support@xcelinfinity.com</h3>
+      </div>
+      <div>
+        <h3>Phone: (555)555-5555</h3>
+      </div>
+      <div>
+        <h3>Address: 324 Fake St, Singapore</h3>
+      </div>
+      <div id="custom-contact">
+        <input type="text" placeholder="Name" ng-model="contactMail.name"/>
+        <input type="text" placeholder="Email" ng-model="contactMail.email"/>
+        <textarea type="text" placeholder="message" ng-model="contactMail.message"></textarea>
+        <input class="signin" id="email-submit" value="send" type="submit" placeholder="Email" ng-click="contactEmail(contactMail)"/>
+      </div>
+      <div id="custom-contact">
+        <h2>Your Message has been sent!</h2>
+        <h4>We will be in touch shortly</h4>
+      </div>
+    </div>
+  </section>
+</section>

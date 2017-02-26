@@ -1,0 +1,20 @@
+<admin-head ng-hide="!currentUser.type" style="z-index: 100;" ></admin-head>
+<div class="dashboard-title" >{{currentUser.name}}'s Dashboard</div>
+<section class="dashboard-wrap">
+  <section class="dashboard-pages">
+    <div class="dash-title">Page List</div>
+    <div class="dash-li" ng-repeat="page in cms" ui-sref={{page.sref}} >{{page.page}} page</div>
+  </section>
+  <section class="dashboard-edit">
+    <div class="dash-title">Edit Content
+      <h4 class="dash-title-save" >Save</h4>
+    </div>
+    <div class="cms-input-wrap">
+      <ui-view></ui-view>
+    </div>
+  </section>
+  <section class="dashboard-courses">
+    <div class="dash-title">Upcomming Curses</div>
+    <div class="add-course">+ Add Course</div>
+  </section>
+</section>
