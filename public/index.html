@@ -15,7 +15,7 @@
 <body ng-controller="mainController">
   <main>
     <main-head ng-hide="currentUser.type === 'admin'" ></main-head>
-    <admin-head ng-hide="!currentUser.type" ></admin-head>
+    <admin-head ng-hide="currentUser.type !== 'admin'" ></admin-head>
     <ui-view></ui-view>
   </main>
 </body>

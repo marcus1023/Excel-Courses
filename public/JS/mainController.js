@@ -56,6 +56,7 @@ $scope.authenticate = function(newUser){
         }, 1600 );
       setTimeout(function() {
         window.location = "/#/adminTools"
+        location.reload();
         }, 2440 );
       }
       $('.admin-welcome-wrap').click(function(){
@@ -67,22 +68,18 @@ $scope.connectUser = function(newUser){
   mainService.connectUser(newUser).then(function(res){
       data = res.data
       $scope.currentUser = data;
+      console.log($scope.currentUser.type )
     });
 }
-
 $scope.connectUser();
 
 // CMS functionality
 $scope.saveCms = function(newCms){
-
 console.log(newCms)
   mainService.saveCms(newCms).then(function(res){
     console.log("SUCCESS!!!", res.data)
     })
 }
-
-
-
 $scope.connectCMS = function(newUser){
   mainService.connectCMS(newUser).then(function(res){
       let cms = res.data;
@@ -90,11 +87,11 @@ $scope.connectCMS = function(newUser){
     });
 }
 $scope.connectCMS();
-
 $scope.buildCMS = function(newcms){
   console.log(newcms)
 }
 $scope.test1 = 'adminTools.home'
+
 
 
 //Users control
@@ -103,7 +100,17 @@ $scope.addToSubscript = function(subscriber){
   mainService.addToSubscript(subscriber).then(function(res){
     });
 }
-
+  //Client control
+  $scope.alert = undefined
+  $scope.newClient = function(client){
+    console.log("from controller", client)
+    mainService.newClient(client).then(function(res){
+      $scope.currentClient = res.data
+      $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
+      $scope.currentClient.paymentReady = true;
+      console.log($scope.currentClient)
+      });
+  }
 // Contact Box
 $('#custom-contact-success').hide();
 $scope.contactEmail = function(contactMail){
@@ -112,7 +119,6 @@ $scope.contactEmail = function(contactMail){
     $('#custom-contact').hide();
   }
 }
-
 /*dropdowns*/
 $('.dropdown-li div').hide()
   let shower = false
