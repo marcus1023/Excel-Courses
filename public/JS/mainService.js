@@ -48,7 +48,27 @@ angular.module('excelCourses' ).service('mainService', function($http, $q){
       data: newUser
     })
   }
-
+//client functionality
+  this.purchaseType = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/purchaseType",
+      data: data
+    })
+  }
+  this.newClient = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/newClient",
+      data: data
+    })
+  }
+  this.getClient = function(){
+    return $http({
+      method: 'GET',
+      url: "/api/getClient"
+    })
+  }
 
 
 })

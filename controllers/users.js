@@ -42,5 +42,29 @@ module.exports = {
   },
   connectUser: function (req, res) {
     res.send(req.session.user)
+  },
+  purchaseType: function (req, res) {
+    req.session.client = {}
+    req.session.client.purchaseType = req.body.type
+    res.send(req.session.client)
+  },
+  newClient: function (req, res) {
+    let data = req.body
+    let pasport = data.pasport
+    let pasportName = data.pasportName
+    let preferName = data.preferName
+    let email = data.email
+    let address = data.address
+    let postalCode = data.postalCode
+    let phone = data.phone
+    let birthDate = data.birthDate
+    let type = 'client'
+    req.session.client.info = data;
+    db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type ], function (err, result) {
+      res.send(req.session.client)
+    })
+  },
+  getClient: function (req, res) {
+    res.send(req.session.client)
   }
 }

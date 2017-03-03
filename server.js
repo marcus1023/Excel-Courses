@@ -44,7 +44,10 @@ app.use(session({
 	app.post('/api/createNewUser', usersCtlr.createNewUser);
 	app.post('/api/authenticate', usersCtlr.authenticate);
 	app.post('/api/addToSubscript', usersCtlr.addToSubscript);
+	app.post('/api/purchaseType', usersCtlr.purchaseType);
+	app.post('/api/newClient', usersCtlr.newClient);
 	app.get('/api/connectUser', usersCtlr.connectUser);
+	app.get('/api/getClient', usersCtlr.getClient);
 
 
 	//EMAIL OUTLINE BEGIN
@@ -94,16 +97,6 @@ app.post('/api/saveCms', function(req, res){
     console.log("The file was saved!");
 });
 	});
-
-/*var fs = require('fs');
-fs.writeFile("/tmp/test", "Hey there!", function(err) {
-    if(err) {
-        return console.log(err);
-    }
-
-    console.log("The file was saved!");
-}); */
-
 
 app.listen(3000, function(){
   console.log('I\'m listening on port 3000');

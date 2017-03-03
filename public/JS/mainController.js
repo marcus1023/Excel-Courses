@@ -68,10 +68,20 @@ $scope.connectUser = function(newUser){
   mainService.connectUser(newUser).then(function(res){
       data = res.data
       $scope.currentUser = data;
-      console.log($scope.currentUser.type )
+      console.log($scope.currentUser.type)
     });
 }
 $scope.connectUser();
+
+//Purchase functionality
+$scope.purchaseType = function(type){
+  console.log(type)
+  data = {type: type}
+  mainService.purchaseType(data).then(function(res){
+    console.log("there and back", res.data)
+    window.location = "/#/paymentInfo"
+    })
+}
 
 // CMS functionality
 $scope.saveCms = function(newCms){
@@ -92,8 +102,6 @@ $scope.buildCMS = function(newcms){
 }
 $scope.test1 = 'adminTools.home'
 
-
-
 //Users control
 $scope.addToSubscript = function(subscriber){
   subscriber.type = 'user'
@@ -111,6 +119,13 @@ $scope.addToSubscript = function(subscriber){
       console.log($scope.currentClient)
       });
   }
+  $scope.getClient = function(){
+    mainService.getClient().then(function(res){
+      $scope.currentClient = res.data
+      console.log($scope.currentClient)
+      });
+  }
+  $scope.getClient()
 // Contact Box
 $('#custom-contact-success').hide();
 $scope.contactEmail = function(contactMail){
