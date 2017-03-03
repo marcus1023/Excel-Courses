@@ -1,4 +1,4 @@
-angular.module('excelCourses',  ['ui.router','ui.calendar', 'ui.bootstrap'])
+angular.module('excelCourses',  ['ui.router'])
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
       .state('home',{
@@ -59,6 +59,17 @@ angular.module('excelCourses',  ['ui.router','ui.calendar', 'ui.bootstrap'])
       .state("adminTools",{
           url:'/adminTools',
           templateUrl: "./JS/templates/adminTools/admin-home.html",
+          controller: "mainController"
+      })
+      //payments
+      .state("paymentInfo",{
+          url:'/paymentInfo',
+          templateUrl: "./JS/templates/paymentinfo.html",
+          controller: "mainController"
+      })
+      .state("paymentFinal",{
+          url:'/paymentFinal',
+          templateUrl: "./JS/templates/paymentfinal.html",
           controller: "mainController"
       })
       //CMS input templates

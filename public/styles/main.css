@@ -1,3 +1,4 @@
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -67,7 +68,7 @@ h2{
   color: #52B529;
 }
 /*Early Bird Section*/
-.grey-bg{
+.-bg{
   background: #e3e3e3;
 }
 .timer-container{
@@ -368,24 +369,24 @@ color: rgba(0,0,0, 1)
   display: flex;
   justify-content: center;
   /*align-items: center;*/
-  margin: 40px 0 0 0;
+  margin: 0px 0 0 0;
   width: 100%;
-  height: 100vh;
-}
-.dashboard-wrap section{
-  border: 1px solid black;
-  height: 85vh;
-  margin: 10px
+  height: 90vh;
 }
 .dashboard-pages{
   width: 20%;
+  border: 1px solid black;
 }
 .dashboard-edit{
+  position: relative;
   width: 40%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 .dashboard-courses{
   position: relative;
   width: 40%;
+  border: 1px solid black;
 }
 .dash-title{
   position: relative;;
@@ -482,52 +483,6 @@ color: rgba(0,0,0, 1)
 .pro-tips .cta-button-md{
   padding: 8px 10px 0 10px;
   height: 40px;
-}
-
-/*CMS system CSS*/
-.CMS-Wrapper{
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.pip-CMS{
-  display: inline-block;
-  width:70%;
-  height: auto;
-}
-.edit-CMS{
-  display: inline-block;
-  width:20%;
-  height: auto;
-}
-.cms-input-wrap{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 90%;
-  overflow: scroll;
-}
-.cms-input-wrap ui-view{
-  width: 100%;
-}
-.cms-inputs{
-  width: 100%;
-  height: 100% !important;
-  justify-content: center !important;
-  align-items: center;
-  text-align: center;
-  padding: 0 0 30px 0;
-}
-.cms-inputs textarea{
-  width: 100%;
-}
-.cms-tag{
-  background: #52B529;
-  padding: 15px 0 20px 0;
-  margin: 20px 0 -10px 0;
-  color: white;
 }
 /*sill features*/
 .admin-welcome-wrap{
@@ -792,6 +747,66 @@ text-align: center;
   background: white;
   border-radius: 5px;
   z-index: 1888;
+}
+/*Payments CSS*/
+.payment-wrap{
+height: 90vh;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.payment-wrap{
+  flex-direction: column;
+}
+.payment-wrap h2{
+  margin: 10px 0 0 0;
+}
+.payment-inputs{
+height: auto;
+width: 400px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.payment-inputs input{
+width: 400px;
+margin: 10px;
+padding: 5px;
+border:1px solid #52B529;
+}
+.payment-inputs #UserInfoSubmit{
+background: #52B529;
+border: 2px solid #52B529;
+color: white;
+width: 100px;
+}
+.payment-methods{
+  height: auto;
+  display: flex;
+}
+.payment-methods div{
+  margin: 10px;
+}
+#paypal{
+  padding: 10px 20px;
+  background:#005EA6;
+  color: white;
+}
+#creditcard{
+  padding: 10px 20px;
+  background: #FF6000;
+  color: white;
+}
+#check{
+  padding: 10px 20px;
+  background: #52B529;
+  color: white;
+}
+.grey-scale{
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
 /*Dropdowns*/
 .dropdown-li{

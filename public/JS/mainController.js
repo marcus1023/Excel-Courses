@@ -1,4 +1,4 @@
-angular.module('excelCourses').controller('mainController', function(mainService, $scope, $interval, $compile, $state,uiCalendarConfig  ){
+angular.module('excelCourses').controller('mainController', function(mainService, $scope, $interval, $compile, $state  ){
 
 
 $scope.testingToDB = function(){
@@ -55,7 +55,7 @@ $scope.authenticate = function(newUser){
         }, 3750);
         }, 1600 );
       setTimeout(function() {
-        window.location = "http://localhost:3000/#/adminTools"
+        window.location = "/#/adminTools"
         }, 2440 );
       }
       $('.admin-welcome-wrap').click(function(){
@@ -73,6 +73,16 @@ $scope.connectUser = function(newUser){
 $scope.connectUser();
 
 // CMS functionality
+$scope.saveCms = function(newCms){
+
+console.log(newCms)
+  mainService.saveCms(newCms).then(function(res){
+    console.log("SUCCESS!!!", res.data)
+    })
+}
+
+
+
 $scope.connectCMS = function(newUser){
   mainService.connectCMS(newUser).then(function(res){
       let cms = res.data;
@@ -118,7 +128,13 @@ $('.dropdown-li').click(function(){
 //slideshow
 $("#slideshow > div:gt(0)").hide();
 
-
+//email
+$scope.contactEmail = function(Mail){
+  console.log(Mail)
+  mainService.contactEmail(Mail).then(function(res){
+    console.log(res)
+    })
+}
 
 
 

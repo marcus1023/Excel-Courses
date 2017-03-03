@@ -1,0 +1,26 @@
+
+<section class="payment-wrap ng-scope">
+  <h2>Excel Infinity User Info</h2>
+  <section class="payment-inputs">
+    <input type="text" placeholder="NRIC/FIN/Passport No" ng-model="client.pasport">
+    <input type="text" placeholder="Name as per Identification" ng-model="client.pasportName">
+    <input type="text" placeholder="Preferred Name" ng-model="client.preferName">
+    <input type="text" placeholder="Email Address" ng-model="client.email">
+    <input type="text" placeholder="Home Address (Optional)" ng-model="client.address">
+    <input type="text" placeholder="Postal code (Optional)" ng-model="client.postalCode">
+    <input type="text" placeholder="Mobile No" ng-model="client.phone">
+    <input type="text" placeholder="Date Of Birth" ng-model="client.birthDate">
+    <input id="UserInfoSubmit" type="submit" ng-click="newClient(client)">
+  </section>
+  <h2>How would you like to pay?</h2>
+  <section class="payment-methods ng-hide" ng-hide="currentClient">
+    <div id="paypal" class="grey-scale">Paypal</div>
+    <div id="creditcard" class="grey-scale">Credit Card</div>
+    <div id="check" class="grey-scale">Check / Bank Transfer</div>
+  </section>
+  <section class="payment-methods" ng-hide="currentClient.paymentReady !== true">
+    <div id="paypal" class="">Paypal</div>
+    <div id="creditcard" class="">Credit Card</div>
+    <div id="check" class="">Check / Bank Transfer</div>
+  </section>
+</section>

@@ -1,15 +1,25 @@
-<div ng-repeat="section in cms.home.sections" class="cms-inputs">
-  <h4 class="cms-tag">{{section.section}}</h4>
-  <div ng-repeat="input in section" ng-if="input[0] !== 'object'">
-    <textarea >{{input}}</textarea>
-  </div>
-  <div ng-repeat="widget in section.widgets" ng-if="widget !== 'object'">
-      <div ng-repeat="single in widget" ng-if="widget !== 'object'">
-          <h5>widget</h5>
-          <textarea >{{single.title}}</textarea>
-          <textarea >{{single.body}}</textarea>
-          <input ng-model="newcms.title"  />
-          <input ng-model="newcms.body"  />
-      </div>
-  </div>
-</div>
+<!-- Home Page CSS -->
+<section class="fullPage-cms">
+<!-- Section One -->
+  <section class="cmsSection-wrap">
+    <h2>Section One (intro banner)</h2>
+    <input type="text" placeholder="Main title" ng-model="cms.home.sections.sectionOne.title"/>
+    <input type="text" placeholder="Subtitle" ng-model="cms.home.sections.sectionOne.subtitle"/>
+    <input type="text" placeholder="Widget One title" ng-model="cms.home.sections.sectionOne.widgets.w1.title"/>
+    <input type="text" placeholder="Widget body" ng-model="cms.home.sections.sectionOne.widgets.w1.body"/>
+    <input type="text" placeholder="Widget Two title" ng-model="cms.home.sections.sectionOne.widgets.w2.title"/>
+    <input type="text" placeholder="Widget body" ng-model="cms.home.sections.sectionOne.widgets.w2.body"/>
+    <input type="text" placeholder="Widget Three title" ng-model="cms.home.sections.sectionOne.widgets.w3.title"/>
+    <input type="text" placeholder="Widget body" ng-model="cms.home.sections.sectionOne.widgets.w3.body"/>
+    <div class="save" ng-click="saveCms(cms)">Save</div>
+  </section>
+  <!-- Section Two -->
+  <h2>Section Two (early bird)</h2>
+  <input type="text" placeholder="Main title" ng-model="cms.home.sections.sectionTwo.title"/>
+  <input type="text" placeholder="Subtitle" ng-model="cms.home.sections.sectionTwo.subtitle"/>
+  <input type="text" placeholder="Timer Subtitle" ng-model="cms.home.sections.sectionTwo.specialTitle"/>
+  <input type="text" placeholder="Timer Title" ng-model="cms.home.sections.sectionTwo.specialSubtitle"/>
+  <input type="text" placeholder="Button" ng-model="cms.home.sections.sectionTwo.button"/>
+
+
+</section>
