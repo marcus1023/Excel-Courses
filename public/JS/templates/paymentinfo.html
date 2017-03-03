@@ -12,7 +12,7 @@
     <input id="UserInfoSubmit" type="submit" ng-click="newClient(client)">
   </section>
   <h2>How would you like to pay?</h2>
-  <section class="payment-methods ng-hide" ng-hide="currentClient">
+  <section class="payment-methods" ng-hide="currentClient.paymentReady">
     <div id="paypal" class="grey-scale">Paypal</div>
     <div id="creditcard" class="grey-scale">Credit Card</div>
     <div id="check" class="grey-scale">Check / Bank Transfer</div>

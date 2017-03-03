@@ -59,7 +59,11 @@ module.exports = {
     let phone = data.phone
     let birthDate = data.birthDate
     let type = 'client'
+    if(!req.session.client){
+      req.session.client = {}
+    }
     req.session.client.info = data;
+    req.session.client.paymentReady = true;
     db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type ], function (err, result) {
       res.send(req.session.client)
     })

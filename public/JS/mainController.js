@@ -115,7 +115,6 @@ $scope.addToSubscript = function(subscriber){
     mainService.newClient(client).then(function(res){
       $scope.currentClient = res.data
       $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
-      $scope.currentClient.paymentReady = true;
       console.log($scope.currentClient)
       });
   }

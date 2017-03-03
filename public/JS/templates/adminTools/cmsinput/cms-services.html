@@ -1,0 +1,17 @@
+<!-- Home Page CSS -->
+<section class="fullPage-cms">
+<!-- Section MAIN -->
+  <section class="cmsSection-wrap">
+    <h2>Section MAIN (intro banner)</h2>
+      <input type="text" placeholder="Timer Subtitle" ng-model="cms.services.sections.sectionMain.title"/>
+      <div class="save" ng-click="saveCms(cms)">Save</div>
+  </section>
+  <!-- Section One -->
+  <h2>Section One (early bird)</h2>
+  <!-- Section Two -->
+  <h2>Section Two ({{cms.home.sections.sectionThree.mainTitle}})</h2>
+  <input type="text" placeholder="Timer Subtitle" ng-model="cms.home.sections.sectionThree.widgets[1].w3.title"/>
+  <textarea type="text" placeholder="Timer Subtitle" ng-model="cms.home.sections.sectionThree.widgets[1].w3.body"></textarea>
+  <!-- Section Three -->
+  <h2>Section Three ({{cms.home.sections.sectionThree.mainTitle}})</h2>
+</section>
