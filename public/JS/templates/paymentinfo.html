@@ -1,15 +1,16 @@
 <section class="payment-wrap">
   <ui-view></ui-view>
-  <h2>Excel Infinity User Info</h2>
+  <h2>Excel Infinity Client Info</h2>
+  <p>Please fill out all required fields</p>
   <section class="payment-inputs">
-    <input type="text" placeholder="NRIC/FIN/Passport No" ng-model="client.pasport">
-    <input type="text" placeholder="Name as per Identification" ng-model="client.pasportName">
-    <input type="text" placeholder="Preferred Name" ng-model="client.preferName">
-    <input type="text" placeholder="Email Address" ng-model="client.email">
-    <input type="text" placeholder="Home Address (Optional)" ng-model="client.address">
-    <input type="text" placeholder="Postal code (Optional)" ng-model="client.postalCode">
-    <input type="text" placeholder="Mobile No" ng-model="client.phone">
-    <input type="text" placeholder="Date Of Birth" ng-model="client.birthDate">
+    <input type="text" ng-value="currentClient.info.pasport" placeholder="NRIC/FIN/Passport No" ng-model="client.pasport">
+    <input type="text" ng-value="currentClient.info.pasportName" placeholder="Name as per Identification" ng-model="client.pasportName">
+    <input type="text" ng-value="currentClient.info.preferName" placeholder="Preferred Name" ng-model="client.preferName">
+    <input type="text" ng-value="currentClient.info.email" placeholder="Email Address" ng-model="client.email">
+    <input type="text" ng-value="currentClient.info.address" placeholder="Home Address (Optional)" ng-model="client.address">
+    <input type="text" ng-value="currentClient.info.postalCode" placeholder="Postal code (Optional)" ng-model="client.postalCode">
+    <input type="text" ng-value="currentClient.info.phone" placeholder="Mobile No" ng-model="client.phone">
+    <input type="text" ng-value="currentClient.info.birthDate" placeholder="Date Of Birth" ng-model="client.birthDate">
     <input id="UserInfoSubmit" type="submit" ng-click="newClient(client)">
   </section>
   <input type="checkbox" ng-click="termsOfService('Agree')"/><p>I agree to the <span ui-sref="paymentInfo.terms">Terms Of Service</span></p>

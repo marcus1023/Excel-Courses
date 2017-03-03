@@ -35,19 +35,20 @@ angular.module('excelCourses' ).service('mainService', function($http, $q){
       url: "/api/connectUser"
     })
   }
-  this.connectCMS = function(){
-    return $http({
-      method: 'GET',
-      url: "/api/connectCMS"
-    })
-  }
-  this.saveCms = function(newUser){
-    return $http({
-      method: 'POST',
-      url: "/api/saveCms",
-      data: newUser
-    })
-  }
+//CMS functionality
+this.cmsConnect = function(){
+  return $http({
+    method: 'GET',
+    url: "/api/cmsConnect"
+  })
+}
+this.saveCms = function(newCms){
+  return $http({
+    method: 'POST',
+    url: "/api/saveCms",
+    data: newCms
+  })
+}
 //client functionality
   this.purchaseType = function(data){
     return $http({

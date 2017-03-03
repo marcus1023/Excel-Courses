@@ -68,7 +68,6 @@ $scope.connectUser = function(newUser){
   mainService.connectUser(newUser).then(function(res){
       data = res.data
       $scope.currentUser = data;
-      console.log($scope.currentUser.type)
     });
 }
 $scope.connectUser();
@@ -84,23 +83,19 @@ $scope.purchaseType = function(type){
 }
 
 // CMS functionality
-$scope.saveCms = function(newCms){
-console.log(newCms)
-  mainService.saveCms(newCms).then(function(res){
-    console.log("SUCCESS!!!", res.data)
+$scope.cmsConnect = function(){
+  mainService.cmsConnect().then(function(res){
+    $scope.cms = res.data
     })
 }
-$scope.connectCMS = function(newUser){
-  mainService.connectCMS(newUser).then(function(res){
-      let cms = res.data;
-      $scope.cms = cms
-    });
+$scope.cmsConnect();
+$scope.saveCms = function(newCms){
+  console.log(newCms)
+  mainService.saveCms(newCms).then(function(res){
+    console.log("got there and back")
+    $scope.cmsConnect()
+    })
 }
-$scope.connectCMS();
-$scope.buildCMS = function(newcms){
-  console.log(newcms)
-}
-$scope.test1 = 'adminTools.home'
 
 //Users control
 $scope.addToSubscript = function(subscriber){

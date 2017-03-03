@@ -8,8 +8,8 @@ var massive = require('massive');
 var connect = massive.connectSync({connectionString: config.connectionString});
 var massiveInstance = massive.connectSync({connectionString : config.connectionString})
 var app = module.exports = express();
-var cms = require('./controllers/cms.js');
 var nodemailer = require('nodemailer');
+var cms = require('./controllers/cms.js');
 var fs = require('fs');
 var router = express.Router();
 
@@ -46,8 +46,10 @@ app.use(session({
 	app.post('/api/addToSubscript', usersCtlr.addToSubscript);
 	app.post('/api/purchaseType', usersCtlr.purchaseType);
 	app.post('/api/newClient', usersCtlr.newClient);
+	app.post('/api/saveCms', cms.saveCms);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
+	app.get('/api/cmsConnect', cms.cmsConnect);
 
 
 	//EMAIL OUTLINE BEGIN
@@ -85,18 +87,15 @@ app.use(session({
 
 
 //CMS  system
-app.get('/api/connectCMS', function (req, res) {
-	res.send(cms.fullCms)
-})
-app.post('/api/saveCms', function(req, res){
-	fs.writeFile("./controllers/test.js", 'module.exports = '+JSON.stringify(req.body), function(err) {
-    if(err) {
-        return console.log(err);
-    }
-    console.log("The file was saved!");
-		res.send("CMS Updated")
-});
-	});
+//app.get('/api/connectCMS', function (req, res) {
+//	res.send(cms.fullCms)
+//	console.log(cms.fullCms)
+//})
+//pp.post('/api/saveCms', function(req, res){
+//	fs.writeFile("./controllers/test.js", 'module.exports = '+JSON.stringify(req.body), function(err) {
+//		});
+//		res.send(cms.fullCms)
+//	});
 
 app.listen(3000, function(){
   console.log('I\'m listening on port 3000');
