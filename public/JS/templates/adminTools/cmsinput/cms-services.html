@@ -2,16 +2,36 @@
 <section class="fullPage-cms">
 <!-- Section MAIN -->
   <section class="cmsSection-wrap">
-    <h2>Section MAIN (intro banner)</h2>
+    <h2>Heading ({{cms.services.sections.sectionMain.title}})</h2>
       <input type="text" placeholder="Timer Subtitle" ng-model="cms.services.sections.sectionMain.title"/>
       <div class="save" ng-click="saveCms(cms)">Save</div>
   </section>
   <!-- Section One -->
-  <h2>Section One (early bird)</h2>
+  <h2>Section One ({{cms.services.sections.sectionOne.title}})</h2>
+  <input type="text" placeholder="Course Title" ng-model="cms.services.sections.sectionOne.title"/>
+  <input type="text" placeholder="Course Subtitle" ng-model="cms.services.sections.sectionOne.subTitle"/>
+  <textarea type="text" placeholder="Course disc" ng-model="cms.services.sections.sectionOne.disc"></textarea>
+  <h4>Popup Section</h4>
+  <input type="text" placeholder="Popup Objective" ng-model="cms.services.sections.sectionOne.popupTitle"/>
+  <textarea type="text" placeholder="Popup disc" ng-model="cms.services.sections.sectionOne.popupTitleDisc"></textarea>
+  <input type="text" placeholder="Popup Title" ng-model="cms.services.sections.sectionOne.popupDiscTitle"/>
+  <textarea type="text" placeholder="Popup disc" ng-model="cms.services.sections.sectionOne.popupDiscDisc"></textarea>
   <!-- Section Two -->
-  <h2>Section Two ({{cms.home.sections.sectionThree.mainTitle}})</h2>
-  <input type="text" placeholder="Timer Subtitle" ng-model="cms.home.sections.sectionThree.widgets[1].w3.title"/>
-  <textarea type="text" placeholder="Timer Subtitle" ng-model="cms.home.sections.sectionThree.widgets[1].w3.body"></textarea>
-  <!-- Section Three -->
-  <h2>Section Three ({{cms.home.sections.sectionThree.mainTitle}})</h2>
+  <h2>Section Two ({{cms.services.sections.sectionTwo.title}})</h2>
+  <input type="text" placeholder="Course Title" ng-model="cms.services.sections.sectionTwo.title"/>
+  <input type="text" placeholder="Course Subtitle" ng-model="cms.services.sections.sectionTwo.subTitle"/>
+  <textarea type="text" placeholder="Course disc" ng-model="cms.services.sections.sectionTwo.disc"></textarea>
+  <h4>Popup Section</h4>
+  <input type="text" placeholder="Popup Objective" ng-model="cms.services.sections.sectionTwo.popupTitle"/>
+  <textarea type="text" placeholder="Popup disc" ng-model="cms.services.sections.sectionTwo.popupTitleDisc"></textarea>
+  <input type="text" placeholder="Popup Title" ng-model="cms.services.sections.sectionTwo.popupDiscTitle"/>
+  <textarea type="text" placeholder="Popup disc" ng-model="cms.services.sections.sectionTwo.popupDiscDisc"></textarea>
+    <!-- Section Three -->
+  <h2>Section Three ({{cms.services.sections.sectionThree.title}})</h2>
+  <input type="text" placeholder="Course Title" ng-model="cms.services.sections.sectionThree.title"/>
+  <input type="text" placeholder="Course Subtitle" ng-model="cms.services.sections.sectionThree.subTitle"/>
+  <textarea type="text" placeholder="Course disc" ng-model="cms.services.sections.sectionThree.disc"></textarea>
+  <h4>Popup Section</h4>
+  <input type="text" placeholder="Popup Objective" ng-model="cms.services.sections.sectionThree.popupTitle"/>
+  <textarea type="text" placeholder="Popup disc" ng-model="cms.services.sections.sectionThree.popupTitleDisc"></textarea>
 </section>

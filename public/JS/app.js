@@ -67,6 +67,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/paymentinfo.html",
           controller: "mainController"
       })
+      .state("paymentInfo.terms",{
+          url:'/terms',
+          templateUrl: "./JS/templates/popups/termsOfService.html",
+          controller: "mainController"
+      })
       .state("paymentFinal",{
           url:'/paymentFinal',
           templateUrl: "./JS/templates/paymentfinal.html",
