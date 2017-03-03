@@ -88,6 +88,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/adminTools/cmsinput/cms-services.html",
           controller: "mainController"
       })
+      .state("adminTools.terms",{
+          url:'/terms',
+          templateUrl: "./JS/templates/adminTools/cmsinput/cms-terms.html",
+          controller: "mainController"
+      })
 
 
 

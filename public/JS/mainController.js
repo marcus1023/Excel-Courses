@@ -125,6 +125,11 @@ $scope.addToSubscript = function(subscriber){
       });
   }
   $scope.getClient()
+  $scope.termsOfService = function(a){
+    if(a == "Agree"){
+      console.log("agree registered")
+    }
+  }
 // Contact Box
 $('#custom-contact-success').hide();
 $scope.contactEmail = function(contactMail){

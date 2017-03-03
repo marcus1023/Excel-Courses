@@ -93,8 +93,8 @@ app.post('/api/saveCms', function(req, res){
     if(err) {
         return console.log(err);
     }
-
     console.log("The file was saved!");
+		res.send("CMS Updated")
 });
 	});
 
