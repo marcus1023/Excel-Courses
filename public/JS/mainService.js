@@ -64,10 +64,23 @@ this.saveCms = function(newCms){
       data: data
     })
   }
+  this.termsOfService = function(){
+    return $http({
+      method: 'GET',
+      url: "/api/termsOfService"
+    })
+  }
   this.getClient = function(){
     return $http({
       method: 'GET',
       url: "/api/getClient"
+    })
+  }
+  this.runningTotal = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/runningTotal",
+      data: data
     })
   }
 

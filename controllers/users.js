@@ -12,7 +12,6 @@ module.exports = {
     let type = data.type
     db.createNewUser([fullName, email,type ], function (err, result) {
       console.log(result,err)
-    //  res.send("again")
     })
   },
   addToSubscript: function (req, res) {
@@ -43,9 +42,23 @@ module.exports = {
   connectUser: function (req, res) {
     res.send(req.session.user)
   },
+  runningTotal: function (req, res) {
+    if(!req.session.client){
+      req.session.client = {}
+      req.session.client.runningTotal = req.body.total
+    }else{
+      req.session.client.runningTotal = req.body.total
+    }
+    res.send(req.session.client)
+  },
   purchaseType: function (req, res) {
-    req.session.client = {}
-    req.session.client.purchaseType = req.body.type
+    if(!req.session.client){
+      req.session.client = {}
+    }
+    if(!req.session.client.purchaseType){
+      req.session.client.purchaseType = []
+    }
+    req.session.client.purchaseType.push(req.body);
     res.send(req.session.client)
   },
   newClient: function (req, res) {
@@ -65,8 +78,16 @@ module.exports = {
     req.session.client.info = data;
     req.session.client.paymentReady = true;
     db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type ], function (err, result) {
+      console.log('got to new client')
       res.send(req.session.client)
     })
+  },
+  termsOfService: function (req, res) {
+    if(!req.session.client){
+      req.session.client = {}
+    }
+    req.session.client.termsOfService = "Accepted"
+    res.send(req.session.client)
   },
   getClient: function (req, res) {
     res.send(req.session.client)

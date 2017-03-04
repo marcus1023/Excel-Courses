@@ -1,28 +1,48 @@
-<section class="payment-wrap">
-  <ui-view></ui-view>
-  <h2>Excel Infinity Client Info</h2>
-  <p>Please fill out all required fields</p>
-  <section class="payment-inputs">
-    <input type="text" ng-value="currentClient.info.pasport" placeholder="NRIC/FIN/Passport No" ng-model="client.pasport">
-    <input type="text" ng-value="currentClient.info.pasportName" placeholder="Name as per Identification" ng-model="client.pasportName">
-    <input type="text" ng-value="currentClient.info.preferName" placeholder="Preferred Name" ng-model="client.preferName">
-    <input type="text" ng-value="currentClient.info.email" placeholder="Email Address" ng-model="client.email">
-    <input type="text" ng-value="currentClient.info.address" placeholder="Home Address (Optional)" ng-model="client.address">
-    <input type="text" ng-value="currentClient.info.postalCode" placeholder="Postal code (Optional)" ng-model="client.postalCode">
-    <input type="text" ng-value="currentClient.info.phone" placeholder="Mobile No" ng-model="client.phone">
-    <input type="text" ng-value="currentClient.info.birthDate" placeholder="Date Of Birth" ng-model="client.birthDate">
-    <input id="UserInfoSubmit" type="submit" ng-click="newClient(client)">
+<section class="payment-section">
+  <section class="payment-wrap">
+    <ui-view></ui-view>
+    <h2>Excel Infinity Client Info</h2>
+    <p>Please fill out all required fields</p>
+    <section class="payment-inputs">
+      <input type="text" ng-value="currentClient.info.pasport" placeholder="NRIC/FIN/Passport No" ng-model="client.pasport">
+      <input type="text" ng-value="currentClient.info.pasportName" placeholder="Name as per Identification" ng-model="client.pasportName">
+      <input type="text" ng-value="currentClient.info.preferName" placeholder="Preferred Name" ng-model="client.preferName">
+      <input type="text" ng-value="currentClient.info.email" placeholder="Email Address" ng-model="client.email">
+      <input type="text" ng-value="currentClient.info.address" placeholder="Home Address (Optional)" ng-model="client.address">
+      <input type="text" ng-value="currentClient.info.postalCode" placeholder="Postal code (Optional)" ng-model="client.postalCode">
+      <input type="text" ng-value="currentClient.info.phone" placeholder="Mobile No" ng-model="client.phone">
+      <input type="text" ng-value="currentClient.info.birthDate" placeholder="Date Of Birth" ng-model="client.birthDate">
+      <input id="UserInfoSubmit" type="submit" ng-click="newClient(client)">
+    </section>
+    <section class="payment-termsCheck">
+      <input id="termsCheck" type="checkbox" ng-click="termsOfService('Agree')"/><p>I agree to the <span ui-sref="paymentInfo.terms">Terms Of Service</span></p>
+    </section>
+    <h2>How would you like to pay?</h2>
+    <section class="payment-methods" ng-hide="currentClient.paymentReady">
+      <div id="paypal" class="grey-scale">Paypal</div>
+      <div id="creditcard" class="grey-scale">Credit Card</div>
+      <div id="check" class="grey-scale">Check / Bank Transfer</div>
+    </section>
+    <section class="payment-methods" ng-hide="currentClient.paymentReady !== true">
+      <div id="paypal" class="">Paypal</div>
+      <div id="creditcard" class="">Credit Card</div>
+      <div id="check" class="">Check / Bank Transfer</div>
+    </section>
   </section>
-  <input type="checkbox" ng-click="termsOfService('Agree')"/><p>I agree to the <span ui-sref="paymentInfo.terms">Terms Of Service</span></p>
-  <h2>How would you like to pay?</h2>
-  <section class="payment-methods" ng-hide="currentClient.paymentReady">
-    <div id="paypal" class="grey-scale">Paypal</div>
-    <div id="creditcard" class="grey-scale">Credit Card</div>
-    <div id="check" class="grey-scale">Check / Bank Transfer</div>
-  </section>
-  <section class="payment-methods" ng-hide="currentClient.paymentReady !== true">
-    <div id="paypal" class="">Paypal</div>
-    <div id="creditcard" class="">Credit Card</div>
-    <div id="check" class="">Check / Bank Transfer</div>
+  <section class="payment-dash">
+    <div class="payment-cart">
+      <section ng-repeat="service in currentClient.purchaseType">
+        <div>
+          <p><b>Service:</b> {{service.type}}</p>
+          <p><b>Individual Price:</b> ${{service.price}}</p>
+        </div>
+      </section>
+      <div>
+        <h2>Total</h2>
+        <p>${{runningTotal}}</p>
+      </div>
+      <p id="payment-checkout-notice">Fill out client information form to continue to checkout</p>
+      <span ui-sref="services">Add More Services</span>
+    </div>
   </section>
 </section>

@@ -10,14 +10,12 @@ var db = app.get('db');
 module.exports = {
   cmsConnect: function(req, res){
     db.getCms( function (err, result) {
-      console.log(result[0].cms)
       res.send(result[0].cms)
     })
   },
   saveCms: function(req, res){
     cms = req.body
     db.updateCms([cms], function (err, result) {
-      console.log(result[0])
       res.send("fluidCms.fullCms")
     })
   }

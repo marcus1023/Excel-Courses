@@ -74,9 +74,8 @@ $scope.connectUser();
 
 //Purchase functionality
 $scope.purchaseType = function(type){
-  console.log(type)
-  data = {type: type}
-  mainService.purchaseType(data).then(function(res){
+  console.log('controller',type)
+  mainService.purchaseType(type).then(function(res){
     console.log("there and back", res.data)
     window.location = "/#/paymentInfo"
     })
@@ -96,7 +95,21 @@ $scope.saveCms = function(newCms){
     $scope.cmsConnect()
     })
 }
+//events functionality
+$('#event-submit').hide()
+$('#event-submit-back').hide()
+$scope.createEvent = function(newEvent){
+  $('#event-submit').hide()
+  $('#event-submit-back').hide()
+  mainService.createEvent(newEvent).then(function(res){
 
+      location.reload();
+    })
+}
+$scope.revealEvent = function(){
+  $('#event-submit').show()
+  $('#event-submit-back').show()
+}
 //Users control
 $scope.addToSubscript = function(subscriber){
   subscriber.type = 'user'
@@ -110,19 +123,30 @@ $scope.addToSubscript = function(subscriber){
     mainService.newClient(client).then(function(res){
       $scope.currentClient = res.data
       $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
-      console.log($scope.currentClient)
+      console.log("hello from service",$scope.currentClient)
       });
   }
   $scope.getClient = function(){
     mainService.getClient().then(function(res){
       $scope.currentClient = res.data
-      console.log($scope.currentClient)
+      $scope.runningTotal = 0;
+      if($scope.currentClient){
+        for(var i = 0; i < $scope.currentClient.purchaseType.length; i++){
+          $scope.runningTotal += $scope.currentClient.purchaseType[i].price
+          mainService.runningTotal({total:$scope.runningTotal}).then(function(res){
+            console.log("hello",res.data)
+            })
+        }
+      }
       });
   }
   $scope.getClient()
   $scope.termsOfService = function(a){
     if(a == "Agree"){
-      console.log("agree registered")
+      $scope.currentClient.termsAgreed = true;
+      mainService.termsOfService().then(function(res){
+      console.log("Server agree registered", res.data)
+        })
     }
   }
 // Contact Box

@@ -46,10 +46,12 @@ app.use(session({
 	app.post('/api/addToSubscript', usersCtlr.addToSubscript);
 	app.post('/api/purchaseType', usersCtlr.purchaseType);
 	app.post('/api/newClient', usersCtlr.newClient);
+	app.post('/api/runningTotal', usersCtlr.runningTotal);
 	app.post('/api/saveCms', cms.saveCms);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
+	app.get('/api/termsOfService', usersCtlr.termsOfService);
 
 
 	//EMAIL OUTLINE BEGIN
