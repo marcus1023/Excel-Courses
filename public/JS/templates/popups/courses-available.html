@@ -1,0 +1,15 @@
+<section class="popup-black" ui-sref="services"></section>
+<section class="popup-container">
+  <section class="popup-wrap">
+    <div class="service-tab" style="width:100%; border: none; height: auto;" >
+      <h1>Select A course Date</h1>
+      <div  id="courseAvailable-pop" ng-repeat="event in events" style="margin: 10px;">
+        <div>
+          <h4>Course: {{event.name}}!</h4>
+          <p>Date: {{event.datebeauty}}</p>
+        </div>
+        <div class="cta-button-md" ng-click="selectCourse(event.id)">Select</div>
+      </div>
+    </div>
+  </section>
+</section>

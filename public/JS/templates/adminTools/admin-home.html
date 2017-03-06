@@ -5,66 +5,18 @@
     <h1>Create Course</h1>
     <!-- <input placeholder="Date" ng-model="event.date"/> -->
     <div>
-      <select>
-        <option value="Select one">Select Month</option>
-        <option value="January">January</option>
-        <option value="Febuary">Febuary</option>
-        <option value="March">March</option>
-        <option value="Airil">Airil</option>
-        <option value="May">May</option>
-        <option value="June">June</option>
-        <option value="July">July</option>
-        <option value="August">August</option>
-        <option value="September">September</option>
-        <option value="October">October</option>
-        <option value="November">November</option>
-        <option value="December">December</option>
+      <select ng-model='newCourse.month' ng-options='month.name for month in newCourseMonth'>
+        <option value="">Select Month</option>
       </select>
-      <select>
-        <option value="Select one">Select Day</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="27">27</option>
-        <option value="20">20</option>
-        <option value="20">20</option>
+      <select ng-model='newCourse.day' ng-options='day.day for day in newCourseDay'>
+        <option value="">Select Day</option>
       </select>
-      <select>
-        <option value="Select one">Select Year</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
+      <select ng-model='newCourse.year' ng-options='year.year for year in newCourseYear'>
+        <option value="">Select Year</option>
       </select>
     </div>
-    <input  placeholder="Event Name" ng-model="event.name"/>
-    <div type="submit" id="email-submit" class="signin" ui-sref="adminTools" ng-click="createEvent(event)">Create Event</div>
+    <input  placeholder="Event Name" ng-model="newCourse.name"/>
+    <div type="submit" id="email-submit" class="signin" ui-sref="adminTools" ng-click="createEvent(newCourse)">Create Event</div>
   </section>
 </section>
 
@@ -84,7 +36,10 @@
   </section>
   <section class="dashboard-courses">
     <div class="dash-title">Upcomming Courses</div>
-    <div>{{events.active}}</div>
+    <div class="single-event" ng-repeat="event in events">
+      <h4>Course: {{event.name}}!</h4>
+      <p>Date: {{event.datebeauty}}</p>
+    </div>
     <div class="add-course" ng-click="revealEvent()">+ Add Course</div>
   </section>
 </section>

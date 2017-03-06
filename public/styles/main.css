@@ -363,7 +363,51 @@ color: rgba(0,0,0, 1)
   color: white;
   padding: 0px 20px;
 }
-
+/*Events page and dash*/
+#courseAvailable-pop div{
+  display: flex;
+  flex-direction: column;
+}
+#courseAvailable-pop{
+  display: flex;
+  justify-content: space-between;
+  padding: 3px;
+  background: rgba(82,	181,	41, 1);
+  border-bottom: 1px solid rgba(0,0,0, .8);
+  color: white;
+  transition: all .7s;
+}
+#courseAvailable-pop p{
+  margin: 2px;
+  padding: 0;
+}
+#courseAvailable-pop h4{
+  margin: 2px;
+  padding: 0;
+}
+.single-event{
+  padding: 3px;
+  background: rgba(82,	181,	41, 1);
+  border-bottom: 1px solid rgba(0,0,0, .8);
+  color: white;
+  transition: all .7s;
+}
+.single-event:first-child{
+  border-bottom: 1px solid rgba(0,0,0, .8);
+  border-top: 1px solid rgba(0,0,0, .8);
+}
+.single-event p{
+  margin: 2px;
+  padding: 0;
+}
+.single-event h4{
+  margin: 2px;
+  padding: 0;
+}
+.single-event:hover{
+  border-bottom: 1px solid rgba(0,0,0, 1);
+  background: rgba(	49,	108,	24, 1);
+}
 /*dashboard page*/
 .dashboard-wrap{
   display: flex;
@@ -734,7 +778,7 @@ text-align: center;
   left:0;
 }
 .popup-container{
-  z-index: ;
+  z-index:;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -745,7 +789,7 @@ text-align: center;
   left:0;
 }
 .popup-wrap{
-  position: absolute;
+  position: fixed;
   top: 160px;
   z-index: 2;
   display: flex;
@@ -873,6 +917,11 @@ width: 100px;
 #paypal{
   padding: 10px 20px;
   background:#005EA6;
+  color: white;
+}
+#customButton{
+  padding: 10px 20px;
+  background: #FF6000;
   color: white;
 }
 #creditcard{

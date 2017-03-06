@@ -12,6 +12,7 @@ var nodemailer = require('nodemailer');
 var cms = require('./controllers/cms.js');
 var fs = require('fs');
 var router = express.Router();
+var stripe = require('stripe')('sk_test_jy88Pcb4D72y1Jlt3DUCT4wg');
 
 //DB controllers required
 let usersCtlr = require('./controllers/users.js') ;
@@ -47,11 +48,14 @@ app.use(session({
 	app.post('/api/purchaseType', usersCtlr.purchaseType);
 	app.post('/api/newClient', usersCtlr.newClient);
 	app.post('/api/runningTotal', usersCtlr.runningTotal);
+	app.post('/api/createEvent', usersCtlr.createEvent);
 	app.post('/api/saveCms', cms.saveCms);
+	app.post('/api/selectCourse', usersCtlr.selectCourse);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
 	app.get('/api/termsOfService', usersCtlr.termsOfService);
+	app.get('/api/getAllevents', usersCtlr.getAllevents);
 
 
 	//EMAIL OUTLINE BEGIN
@@ -88,16 +92,25 @@ app.use(session({
 //EMAIL OUTLINE ENDED
 
 
-//CMS  system
-//app.get('/api/connectCMS', function (req, res) {
-//	res.send(cms.fullCms)
-//	console.log(cms.fullCms)
-//})
-//pp.post('/api/saveCms', function(req, res){
-//	fs.writeFile("./controllers/test.js", 'module.exports = '+JSON.stringify(req.body), function(err) {
-//		});
-//		res.send(cms.fullCms)
-//	});
+// Stripe BEGINS
+app.post('/api/charge', function(req, res) {
+    var stripeToken = req.body.stripeToken;
+    var amount = req.body.ammount;
+		console.log(req.body, req.body.stripeToken)
+    stripe.charges.create({
+        card: stripeToken,
+        currency: 'usd',
+        amount: amount
+    },
+    function(err, charge) {
+        if (err) {
+            res.sendStatus(500, err);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+// Stripe ENDS
 
 app.listen(3000, function(){
   console.log('I\'m listening on port 3000');

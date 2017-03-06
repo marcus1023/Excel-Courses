@@ -41,6 +41,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/popups/consult-pop.html",
           controller: "mainController"
       })
+      .state("services.coursesAvailable",{
+          url:'/coursesAvailable',
+          templateUrl: "./JS/templates/popups/courses-available.html",
+          controller: "mainController"
+      })
       .state("excelTips",{
           url:'/excelTips',
           templateUrl: "./JS/templates/excelTips.html",
@@ -98,7 +103,17 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/adminTools/cmsinput/cms-terms.html",
           controller: "mainController"
       })
-
+      .state("adminTools.excelTips",{
+          url:'/excelTips',
+          templateUrl: "./JS/templates/adminTools/cmsinput/cms-excelTips.html",
+          controller: "mainController"
+      })
+      //payments STUFF
+      .state("stripePayment",{
+          url:'/stripePayment',
+          templateUrl: "./JS/templates/stripePayments.html",
+          controller: "mainController"
+      })
 
 
         $urlRouterProvider

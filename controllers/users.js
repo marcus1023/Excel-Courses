@@ -91,5 +91,32 @@ module.exports = {
   },
   getClient: function (req, res) {
     res.send(req.session.client)
+  },
+  createEvent: function (req, res) {
+    let name = req.body.name
+    let month = req.body.month.number
+    let day = req.body.day.day
+    let year = req.body.year.year
+    let dateCalc = year+'.'+month+'.'+day
+    let dateBeauty = req.body.month.name+' - '+day+' - '+year
+    let unxDate = new Date(dateCalc).getTime() / 1000
+    db.createEvent([name,unxDate,dateBeauty], function(err,result){
+      res.send('event logged')
+      })
+  },
+  getAllevents: function (req, res) {
+    db.getAllevents(function(err,result){
+      let unxDate = Math.round(new Date().getTime() / 1000)
+      let eventCalc = []
+      for(let i = 0; i < result.length; i++){
+        if(result[i].coursedate > unxDate){
+          eventCalc.push(result[i])
+        }
+      }
+      res.send(eventCalc)
+      })
+  },
+  selectCourse: function (req, res) {
+    console.log(req.body)
   }
 }

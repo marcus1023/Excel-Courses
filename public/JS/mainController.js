@@ -77,7 +77,6 @@ $scope.purchaseType = function(type){
   console.log('controller',type)
   mainService.purchaseType(type).then(function(res){
     console.log("there and back", res.data)
-    window.location = "/#/paymentInfo"
     })
 }
 
@@ -95,20 +94,42 @@ $scope.saveCms = function(newCms){
     $scope.cmsConnect()
     })
 }
-//events functionality
+//events control
+$scope.getAllevents = function(){
+  mainService.getAllevents().then(function(res){
+    $scope.events = []
+    for(let i = 0; i < res.data.length; i++){
+      $scope.events.push(res.data[i])
+    }
+    console.log(res.data)
+    console.log($scope.events)
+    })
+}
+$scope.getAllevents()
+$scope.newCourseMonth = [{name:'January', number: 1},{name:'Feburay', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
+$scope.newCourseDay = [{day:1},{day:2},{day:3},{day:4},{day:5},{day:6},{day:7},{day:8},{day:9},{day:10},{day:11},{day:12},{day:13},{day:14},{day:15},{day:16},{day:17},{day:18},{day:19},{day:20},{day:21},{day:22},{day:23},{day:24},{day:25},{day:26},{day:27},{day:28},{day:29},{day:30},{day:31}]
+$scope.newCourseYear = [{year: 2017},{year: 2018},{year: 2019},{year: 2020}]
 $('#event-submit').hide()
 $('#event-submit-back').hide()
 $scope.createEvent = function(newEvent){
   $('#event-submit').hide()
   $('#event-submit-back').hide()
+  console.log(newEvent)
   mainService.createEvent(newEvent).then(function(res){
-
+      console.log(res.data)
       location.reload();
     })
 }
 $scope.revealEvent = function(){
   $('#event-submit').show()
   $('#event-submit-back').show()
+}
+$scope.selectCourse = function(courseId){
+  id = {id: courseId}
+  console.log(id)
+  mainService.selectCourse(id).then(function(res){
+
+    })
 }
 //Users control
 $scope.addToSubscript = function(subscriber){
@@ -130,6 +151,7 @@ $scope.addToSubscript = function(subscriber){
     mainService.getClient().then(function(res){
       $scope.currentClient = res.data
       $scope.runningTotal = 0;
+      $scope.stripeTotal = 0;
       if($scope.currentClient){
         for(var i = 0; i < $scope.currentClient.purchaseType.length; i++){
           $scope.runningTotal += $scope.currentClient.purchaseType[i].price
@@ -137,6 +159,8 @@ $scope.addToSubscript = function(subscriber){
             console.log("hello",res.data)
             })
         }
+        $scope.stripeTotal = $scope.runningTotal * 100
+        console.log('$scope.stripeTotal',$scope.stripeTotal)
       }
       });
   }
@@ -145,14 +169,12 @@ $scope.addToSubscript = function(subscriber){
     if(a == "Agree"){
       $scope.currentClient.termsAgreed = true;
       mainService.termsOfService().then(function(res){
-      console.log("Server agree registered", res.data)
         })
     }
   }
 // Contact Box
 $('#custom-contact-success').hide();
 $scope.contactEmail = function(contactMail){
-  console.log(contactMail)
   if(contactMail.name && contactMail.email){
     $('#custom-contact').hide();
   }
@@ -174,12 +196,39 @@ $("#slideshow > div:gt(0)").hide();
 
 //email
 $scope.contactEmail = function(Mail){
-  console.log(Mail)
   mainService.contactEmail(Mail).then(function(res){
-    console.log(res)
     })
 }
 
+// Stripe
 
+var handler = StripeCheckout.configure({
+  key: 'pk_test_yBTdwsi8MZx1RLopICuaVcPc',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+    data = {stripeToken: token.id, ammount: runningTotal}
+    mainService.stripePayment(data).then(function(res){
+      console.log("stripe connected", res.data)
+      })
+  }
+});
+
+$('#customButton').click(function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'Excel Infinity',
+    description: 'Excel Services',
+    amount: $scope.stripeTotal
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  handler.close();
+});
 
   })

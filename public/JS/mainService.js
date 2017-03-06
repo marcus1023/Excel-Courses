@@ -84,5 +84,36 @@ this.saveCms = function(newCms){
     })
   }
 
+  //Events and courses
+  this.createEvent = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/createEvent",
+      data: data
+    })
+  }
+  this.getAllevents = function(){
+    return $http({
+      method: 'GET',
+      url: "/api/getAllevents"
+    })
+  }
+  this.selectCourse = function(id){
+    return $http({
+      method: 'POST',
+      url: "/api/selectCourse",
+      data: id
+    })
+  }
+  // stripePayment
+  this.stripePayment = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/charge",
+      data: data
+    })
+  }
+
+
 
 })
