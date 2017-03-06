@@ -118,5 +118,22 @@ module.exports = {
   },
   selectCourse: function (req, res) {
     console.log(req.body)
+  },
+  saveNewTesty: function (req, res) {
+    console.log(req.body)
+    let data = req.body
+    let name = data.name
+    let location = data.location
+    let body = data.testy
+    db.saveNewTesty([name,location,body], function(err,result){
+      res.send('testy logged')
+      console.log(err)
+      })
+  },
+  getTestys: function (req, res) {
+    db.getTestys(function(err,result){
+      req.session.testimonials = result
+      res.send(req.session.testimonials)
+      })
   }
 }

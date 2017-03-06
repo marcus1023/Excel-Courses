@@ -51,11 +51,13 @@ app.use(session({
 	app.post('/api/createEvent', usersCtlr.createEvent);
 	app.post('/api/saveCms', cms.saveCms);
 	app.post('/api/selectCourse', usersCtlr.selectCourse);
+	app.post('/api/saveNewTesty', usersCtlr.saveNewTesty);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
 	app.get('/api/termsOfService', usersCtlr.termsOfService);
 	app.get('/api/getAllevents', usersCtlr.getAllevents);
+	app.get('/api/getTestys', usersCtlr.getTestys);
 
 
 	//EMAIL OUTLINE BEGIN

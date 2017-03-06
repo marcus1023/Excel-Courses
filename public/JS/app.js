@@ -108,6 +108,21 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/adminTools/cmsinput/cms-excelTips.html",
           controller: "mainController"
       })
+      .state("adminTools.about",{
+          url:'/cmsabout',
+          templateUrl: "./JS/templates/adminTools/cmsinput/cms-about.html",
+          controller: "mainController"
+      })
+      .state("adminTools.testys",{
+          url:'/cmstestys',
+          templateUrl: "./JS/templates/adminTools/cmsinput/cms-testimonials.html",
+          controller: "mainController"
+      })
+      .state("adminTools.contact",{
+          url:'/contact',
+          templateUrl: "./JS/templates/adminTools/cmsinput/cms-contact.html",
+          controller: "mainController"
+      })
       //payments STUFF
       .state("stripePayment",{
           url:'/stripePayment',

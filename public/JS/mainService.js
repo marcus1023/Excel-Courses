@@ -83,7 +83,20 @@ this.saveCms = function(newCms){
       data: data
     })
   }
-
+//Testy controll
+this.saveNewTesty = function(data){
+  return $http({
+    method: 'POST',
+    url: "/api/saveNewTesty",
+    data: data
+  })
+}
+this.getTestys = function(){
+  return $http({
+    method: 'GET',
+    url: "/api/getTestys"
+  })
+}
   //Events and courses
   this.createEvent = function(data){
     return $http({

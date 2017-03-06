@@ -74,9 +74,7 @@ $scope.connectUser();
 
 //Purchase functionality
 $scope.purchaseType = function(type){
-  console.log('controller',type)
   mainService.purchaseType(type).then(function(res){
-    console.log("there and back", res.data)
     })
 }
 
@@ -90,10 +88,21 @@ $scope.cmsConnect();
 $scope.saveCms = function(newCms){
   console.log(newCms)
   mainService.saveCms(newCms).then(function(res){
-    console.log("got there and back")
     $scope.cmsConnect()
     })
 }
+
+//Testimonials
+$scope.saveNewTesty = function(newTesty){
+  mainService.saveNewTesty(newTesty).then(function(res){
+    })
+}
+$scope.getTestys = function(){
+  mainService.getTestys().then(function(res){
+    $scope.allTestimonials = res.data
+    })
+}
+$scope.getTestys();
 //events control
 $scope.getAllevents = function(){
   mainService.getAllevents().then(function(res){
@@ -101,8 +110,6 @@ $scope.getAllevents = function(){
     for(let i = 0; i < res.data.length; i++){
       $scope.events.push(res.data[i])
     }
-    console.log(res.data)
-    console.log($scope.events)
     })
 }
 $scope.getAllevents()
@@ -114,9 +121,7 @@ $('#event-submit-back').hide()
 $scope.createEvent = function(newEvent){
   $('#event-submit').hide()
   $('#event-submit-back').hide()
-  console.log(newEvent)
   mainService.createEvent(newEvent).then(function(res){
-      console.log(res.data)
       location.reload();
     })
 }
@@ -126,7 +131,6 @@ $scope.revealEvent = function(){
 }
 $scope.selectCourse = function(courseId){
   id = {id: courseId}
-  console.log(id)
   mainService.selectCourse(id).then(function(res){
 
     })
@@ -140,11 +144,9 @@ $scope.addToSubscript = function(subscriber){
   //Client control
   $scope.alert = undefined
   $scope.newClient = function(client){
-    console.log("from controller", client)
     mainService.newClient(client).then(function(res){
       $scope.currentClient = res.data
       $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
-      console.log("hello from service",$scope.currentClient)
       });
   }
   $scope.getClient = function(){
@@ -156,11 +158,9 @@ $scope.addToSubscript = function(subscriber){
         for(var i = 0; i < $scope.currentClient.purchaseType.length; i++){
           $scope.runningTotal += $scope.currentClient.purchaseType[i].price
           mainService.runningTotal({total:$scope.runningTotal}).then(function(res){
-            console.log("hello",res.data)
             })
         }
         $scope.stripeTotal = $scope.runningTotal * 100
-        console.log('$scope.stripeTotal',$scope.stripeTotal)
       }
       });
   }
