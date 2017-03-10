@@ -1,0 +1,51 @@
+<section class="checkout-wrap">
+  <section class="checkout-deals checkout-summary">
+    <h4>Take advantage of these deals!</h4>
+    <div>
+      <p>register for both course and 1-1 Mentoring and get a 50% off the latter. </p>
+      <div class="cta-button-sm" ui-sref="checkout">Add Mentoring to Order</div>
+    </div>
+    <div>
+      <p>Register for Consultancy now to get 50% off. </p>
+      <div class="cta-button-sm" ui-sref="checkout">Add Mentoring to Order</div>
+    </div>
+    <div style=" border-bottom: 1px solid #52B529;">
+      <p>Add additional people to your course and save 50$ per person</p>
+      <select ng-model='addPeople.number' class="cta-button-sm"  style="width:94%;" ng-options='number.number for number in addPeople'>
+        <option value="" >Select</option>
+      </select>
+    </div>
+    <div style=" border-bottom: 1px solid #52B529;">
+      <p style="margin: 5px 0 5px 11px;">Number of slots available in your class: {{slotsAvailable}}</p>
+    </div>
+  </section>
+  <section class="payment-dash checkout-summary">
+    <div class="payment-cart">
+      <section ng-repeat="service in currentClient.purchaseType">
+        <div>
+          <p><b>Service:</b> {{service.type}}</p>
+          <p><b>Individual Price:</b> ${{service.price}}</p>
+        </div>
+      </section>
+      <div>
+        <h2>Total</h2>
+        <p>${{runningTotal}}</p>
+      </div>
+    </div>
+    <p id="payment-checkout-notice">Confirm order and select payment type</p>
+    <div class="cta-button-md" ui-sref="checkout" ng-click="revealButtons()" >Confirm order checkout</div>
+  </section>
+</section>
+<section class="checkout-pay">
+  <h2>How would you like to pay?</h2>
+  <section class="payment-methods" ng-hide="activateButtons">
+    <div id="paypal" class="grey-scale">Paypal</div>
+    <div id="creditcard" class="grey-scale">Credit Card</div>
+    <div id="check" class="grey-scale">Check / Bank Transfer</div>
+  </section>
+  <section class="payment-methods" ng-hide="activateButtons !== true">
+    <div id="paypal" class="">Paypal</div>
+    <div id="customButton" class="">Credit Card</div>
+    <div id="check" class="">Check / Bank Transfer</div>
+  </section>
+</section>

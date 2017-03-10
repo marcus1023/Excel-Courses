@@ -17,17 +17,7 @@
     <section class="payment-termsCheck">
       <input id="termsCheck" type="checkbox" ng-click="termsOfService('Agree')"/><p>I agree to the <span ui-sref="paymentInfo.terms">Terms Of Service</span></p>
     </section>
-    <h2>How would you like to pay?</h2>
-    <section class="payment-methods" ng-hide="currentClient.paymentReady">
-      <div id="paypal" class="grey-scale">Paypal</div>
-      <div id="creditcard" class="grey-scale">Credit Card</div>
-      <div id="check" class="grey-scale">Check / Bank Transfer</div>
-    </section>
-    <section class="payment-methods" ng-hide="currentClient.paymentReady !== true">
-      <div id="paypal" class="">Paypal</div>
-      <div id="creditcard" class="">Credit Card</div>
-      <div id="check" class="">Check / Bank Transfer</div>
-    </section>
+    <div class="cta-button-md" ng-hide="currentClient.paymentReady !== true && currentClient.termsAgreed !== true" ui-sref="checkout">Continue to checkout</div>
   </section>
   <section class="payment-dash">
     <div class="payment-cart">

@@ -5,6 +5,19 @@
     <h1>Create Course</h1>
     <!-- <input placeholder="Date" ng-model="event.date"/> -->
     <div>
+      <p>Start</p>
+      <select ng-model='newCourse.month' ng-options='month.name for month in newCourseMonth'>
+        <option value="">Select Month</option>
+      </select>
+      <select ng-model='newCourse.day' ng-options='day.day for day in newCourseDay'>
+        <option value="">Select Day</option>
+      </select>
+      <select ng-model='newCourse.year' ng-options='year.year for year in newCourseYear'>
+        <option value="">Select Year</option>
+      </select>
+    </div>
+    <div>
+      <p>End</p>
       <select ng-model='newCourse.month' ng-options='month.name for month in newCourseMonth'>
         <option value="">Select Month</option>
       </select>
@@ -35,7 +48,7 @@
     </div>
   </section>
   <section class="dashboard-courses">
-    <div class="dash-title">Upcomming Courses</div>
+    <div class="dash-title">Upcoming Courses</div>
     <div class="single-event" ng-repeat="event in events">
       <h4>Course: {{event.name}}!</h4>
       <p>Date: {{event.datebeauty}}</p>
