@@ -14,6 +14,13 @@ angular.module('excelCourses' ).service('mainService', function($http, $q){
       data: data
     })
   }
+  this.confirmCohort = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/confirmCohort",
+      data: data
+    })
+  }
   this.contactEmail = function(Mail){
     console.log("got to service")
     return $http({
@@ -62,6 +69,12 @@ this.saveCms = function(newCms){
       method: 'POST',
       url: "/api/newClient",
       data: data
+    })
+  }
+  this.getebTimer = function(){
+    return $http({
+      method: 'GET',
+      url: "/api/getebTimer"
     })
   }
   this.termsOfService = function(){

@@ -18,13 +18,13 @@
     </div>
     <div>
       <p>End</p>
-      <select ng-model='newCourse.month' ng-options='month.name for month in newCourseMonth'>
+      <select ng-model='newCourse.month2' ng-options='month.name for month in newCourseMonth2'>
         <option value="">Select Month</option>
       </select>
-      <select ng-model='newCourse.day' ng-options='day.day for day in newCourseDay'>
+      <select ng-model='newCourse.day2' ng-options='day.day for day in newCourseDay2'>
         <option value="">Select Day</option>
       </select>
-      <select ng-model='newCourse.year' ng-options='year.year for year in newCourseYear'>
+      <select ng-model='newCourse.year2' ng-options='year.year for year in newCourseYear2'>
         <option value="">Select Year</option>
       </select>
     </div>
@@ -50,9 +50,11 @@
   <section class="dashboard-courses">
     <div class="dash-title">Upcoming Courses</div>
     <div class="single-event" ng-repeat="event in events">
-      <h4>Course: {{event.name}}!</h4>
-      <p>Date: {{event.datebeauty}}</p>
+      <h4>Course: {{event.name}}</h4>
+      <p>Start: {{event.datebeauty}}</p>
+      <p>End: {{event.datebeauty2}}</p>
     </div>
-    <div class="add-course" ng-click="revealEvent()">+ Add Course</div>
   </section>
+  <div class="add-course" ng-click="revealEvent()">+ Add Course</div>
+  <div class="add-course-underlay">+ Add Course</div>
 </section>

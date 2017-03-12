@@ -52,21 +52,22 @@ app.use(session({
 	app.post('/api/saveCms', cms.saveCms);
 	app.post('/api/selectCourse', usersCtlr.selectCourse);
 	app.post('/api/saveNewTesty', usersCtlr.saveNewTesty);
+	app.post('/api/confirmCohort', usersCtlr.confirmCohort);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
 	app.get('/api/termsOfService', usersCtlr.termsOfService);
 	app.get('/api/getAllevents', usersCtlr.getAllevents);
 	app.get('/api/getTestys', usersCtlr.getTestys);
+	app.get('/api/getebTimer', usersCtlr.getebTimer);
 
 
 	//EMAIL OUTLINE BEGIN
 	app.post('/api/contactEmail', function handleSayHello(req, res) {
-    // Not the movie transporter!
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'marcuslogden@gmail.com', // Your email id
+            user: 'benne@excelinfinity.com', // Your email id
             pass: 'NCCode24' // Your password
         }
     });

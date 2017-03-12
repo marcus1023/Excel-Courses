@@ -2,14 +2,10 @@ angular.module('excelCourses').controller('mainController', function(mainService
 
 $scope.slotsAvailable = 5;
 
-$scope.testingToDB = function(){
-  let data = {name: "jimmy", email: "james@collufloweer.cam"}
-  mainService.testingToDB(data).then(function(res){
-  })
-}
-
+$scope.earlyBirdTimerD = 30
+$scope.earlyBirdTimerH = 30
 $scope.earlyBirdTimerM = 60
-$scope.earlyBirdTimerS = 1
+$scope.earlyBirdTimerS = 13
 $scope.earlyBirdTimerZ;
 
   $interval(function(){
@@ -31,8 +27,17 @@ $scope.earlyBirdTimerZ;
         $scope.earlyBirdTimerS = "shed"
       }
     }
-  }, 2000);
-
+  }, 1500);
+$scope.getebTimer = function(){
+  mainService.getebTimer().then(function(res){
+    let ebTimer = res.data
+    $scope.earlyBirdTimerD = ebTimer.days
+    $scope.earlyBirdTimerH = ebTimer.hours
+    $scope.earlyBirdTimerM = ebTimer.minutes
+   console.log('heeelo',res.data)
+    })
+}
+$scope.getebTimer()
 
 
 $scope.createNewUser = function(newUser){
@@ -76,6 +81,7 @@ $scope.connectUser();
 //Purchase functionality
 $scope.purchaseType = function(type){
   mainService.purchaseType(type).then(function(res){
+    location.reload();
     })
 }
 
@@ -117,6 +123,9 @@ $scope.getAllevents()
 $scope.newCourseMonth = [{name:'January', number: 1},{name:'Feburay', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
 $scope.newCourseDay = [{day:1},{day:2},{day:3},{day:4},{day:5},{day:6},{day:7},{day:8},{day:9},{day:10},{day:11},{day:12},{day:13},{day:14},{day:15},{day:16},{day:17},{day:18},{day:19},{day:20},{day:21},{day:22},{day:23},{day:24},{day:25},{day:26},{day:27},{day:28},{day:29},{day:30},{day:31}]
 $scope.newCourseYear = [{year: 2017},{year: 2018},{year: 2019},{year: 2020}]
+$scope.newCourseMonth2 = [{name:'January', number: 1},{name:'Feburay', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
+$scope.newCourseDay2 = [{day:1},{day:2},{day:3},{day:4},{day:5},{day:6},{day:7},{day:8},{day:9},{day:10},{day:11},{day:12},{day:13},{day:14},{day:15},{day:16},{day:17},{day:18},{day:19},{day:20},{day:21},{day:22},{day:23},{day:24},{day:25},{day:26},{day:27},{day:28},{day:29},{day:30},{day:31}]
+$scope.newCourseYear2 = [{year: 2017},{year: 2018},{year: 2019},{year: 2020}]
 $scope.addPeople = [{number: 1},{number: 2},{number: 3},{number: 4},{number: 5},{number: 6},{number: 8},{number: 9}]
 $('#event-submit').hide()
 $('#event-submit-back').hide()
@@ -148,25 +157,36 @@ $scope.addToSubscript = function(subscriber){
   $scope.activateButtons = false
   $scope.revealButtons = function(){
       $scope.activateButtons = true
+      console.log($scope.currentClient.cohort)
+      data = {cohort:$scope.currentClient.cohort , id: $scope.currentClient.userid}
+      mainService.confirmCohort(data).then(function(res){
+        console.log('cohort confirmed')
+        })
   }
   $scope.newClient = function(client){
     mainService.newClient(client).then(function(res){
       $scope.currentClient = res.data
+      console.log($scope.currentClient)
       $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
       });
   }
   $scope.getClient = function(){
     mainService.getClient().then(function(res){
       $scope.currentClient = res.data
+      console.log($scope.currentClient)
       $scope.runningTotal = 0;
       $scope.stripeTotal = 0;
       if($scope.currentClient){
         for(var i = 0; i < $scope.currentClient.purchaseType.length; i++){
           $scope.runningTotal += $scope.currentClient.purchaseType[i].price
+          if($scope.currentClient.savingsType[0]){
+            $scope.runningTotal += $scope.currentClient.savingsType[i].price
+          }
           mainService.runningTotal({total:$scope.runningTotal}).then(function(res){
             })
         }
         $scope.stripeTotal = $scope.runningTotal * 100
+        console.log($scope.currentClient)
       }
       });
   }
@@ -206,8 +226,44 @@ $scope.contactEmail = function(Mail){
     })
 }
 
-// Stripe
+//paypalobjects
+/*paypal.Button.render({
 
+     env: 'sandbox', // Optional: specify 'sandbox' environment
+
+     client: {
+         sandbox:    'AUVKm6PaBOwm5jOyRasoKwxEIfGHFuN2BjYeneEXJa3ci7zw8UIDKcBd-smVq_ANq17KwYFkE7icLUNF',
+         production: 'xxxxxxxxx'
+     },
+
+     payment: function() {
+
+         var env    = this.props.env;
+         var client = this.props.client;
+
+         return paypal.rest.payment.create(env, client, {
+             transactions: [
+                 {
+                     amount: { total: $scope.runningTotal, currency: 'USD' }
+                 }
+             ]
+         });
+     },
+
+     commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+
+     onAuthorize: function(data, actions) {
+
+         // Optional: display a confirmation page here
+
+         return actions.payment.execute().then(function() {
+             // Show a success page to the buyer
+         });
+     }
+
+ }, '#paypal-button');*/
+
+// Stripe
 var handler = StripeCheckout.configure({
   key: 'pk_test_yBTdwsi8MZx1RLopICuaVcPc',
   image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -227,7 +283,7 @@ $('#customButton').click(function(e) {
   handler.open({
     name: 'Excel Infinity',
     description: 'Excel Services',
-    amount: $scope.stripeTotal
+    amount: $scope.runningTotal * 100
   });
   e.preventDefault();
 });

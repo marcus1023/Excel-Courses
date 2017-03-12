@@ -19,16 +19,20 @@
     </div>
   </div>
 </section>
-<!-- early birs special -->
+<!-- early bird special -->
 <section class="home-page-widgets early-bird bg-img">
   <h1>{{cms.home.sections.sectionTwo.title}}</h1>
   <h2>{{cms.home.sections.sectionTwo.subtitle}}</h2>
+    <h3>There are {{slotsAvailable}} left in our next class!</h3>
   <div class="timer-container">
     <p>{{cms.home.sections.sectionTwo.specialTitle}}</p>
     <h2>{{cms.home.sections.sectionTwo.specialSubtitle}}</h2>
-    <h2 id="early-bird-counter">{{earlyBirdTimerM}}:{{earlyBirdTimerZ}}{{earlyBirdTimerS}}</h2>
+    <h2 id="early-bird-counter">{{earlyBirdTimerD}}:{{earlyBirdTimerH}}:{{earlyBirdTimerM}}:{{earlyBirdTimerZ}}{{earlyBirdTimerS}}</h2>
+    <div style="margin-left:10px;">
+      <span>Days</span><span>Hours</span><span style="margin-left:40px;">Minutes</span><span>Seconds</span>
+    </div>
   </div>
-  <div class="early-bird-cta">{{cms.home.sections.sectionTwo.button}}</div>
+  <div class="early-bird-cta" ui-sref="services">{{cms.home.sections.sectionTwo.button}}</div>
 </section>
 
 <section class="home-page-about">

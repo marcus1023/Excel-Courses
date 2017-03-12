@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="http://icons.iconarchive.com/icons/cornmanthe3rd/plex/512/Other-excel-icon.png">
 
 </head>
-<body ng-controller="mainController">
+<body>
   <main>
     <main-head ng-hide="currentUser.type === 'admin'" ></main-head>
     <admin-head ng-hide="currentUser.type !== 'admin'" ></admin-head>
@@ -35,14 +35,7 @@
 <script src="./JS/directives/main-head.js"></script>
 <script src="./JS/directives/admin-head.js"></script>
 <!-- Custom Directives -->
-
-<!-- Load the required components for paypal. -->
-<script src="https://js.braintreegateway.com/web/3.8.0/js/client.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.8.0/js/paypal.min.js"></script>
-
-<!-- Use the components. We'll see usage instructions next. -->
-<script>
-braintree.client.create(/* ... */);
-</script>
+<!-- PAYPAL -->
+<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
 </body>
 </html>
