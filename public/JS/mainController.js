@@ -77,7 +77,9 @@ $scope.connectUser = function(newUser){
     });
 }
 $scope.connectUser();
-
+$('.areallybadidea').click(function(){
+  $('.areallybadidea').hide()
+  })
 //Purchase functionality
 $scope.purchaseType = function(type){
   mainService.purchaseType(type).then(function(res){

@@ -1,17 +1,17 @@
 .headerSpacer{
-  height: 45px;
+  height: 65px;
   background: white;
 }
 .nav-bar{
   position: fixed;
-  top: 0;
+  top: 25px;
   width: 100%;
   height: 45px;
   background: #52B529;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  z-index: 1;
+  z-index: 1000 !important;
 }
 .nav-bar ul{
   margin: 0px;

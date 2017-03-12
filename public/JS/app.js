@@ -6,6 +6,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/home-tmpl.html",
           controller: "mainController"
       })
+      .state('home.select',{
+          url:'/select',
+          templateUrl: "./JS/templates/popups/selections-pop.html",
+          controller: "mainController"
+      })
       .state('about',{
           url:'/about',
           templateUrl: "./JS/templates/about.html",
@@ -137,6 +142,6 @@ angular.module('excelCourses',  ['ui.router'])
 
 
         $urlRouterProvider
-        .when('/', '/home')
+        .when('/', '/select')
             .otherwise('/');
     });
