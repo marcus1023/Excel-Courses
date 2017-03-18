@@ -11,10 +11,10 @@
         <ul>
           <li ui-sref="about">About Us</li>
           <li ui-sref="testimonials">Testimonials</li>
-          <li ui-sref="contact">contact</li>
         </ul>
       </div>
     </li>
+    <li ui-sref="contact">contact</li>
     <li ui-sref="signin" ng-hide="currentUser.type === 'admin'"> Sign in</li>
     <li ui-sref="adminTools" ng-hide="!currentUser.type"> Admin Tools</li>
   </ul>

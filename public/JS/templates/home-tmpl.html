@@ -1,13 +1,12 @@
 
-  <section class="areallybadidea" ui-sref="home">
-  <section class="home-page-widgets" style="width: 85%; min-height: 90vh !important; background: rgba(255,255,255, 1)">
+  <section class="home-page-widgets">
     <h1>{{cms.home.sections.sectionOne.title}}</h1>
     <h2>{{cms.home.sections.sectionOne.subtitle}}</h2>
     <div class="widget-container">
       <div>
         <h2>{{cms.home.sections.sectionOne.widgets.w1.title}}</h2>
         <p>{{cms.home.sections.sectionOne.widgets.w1.body}}</p>
-        <button ui-sref="services.course">Get started!</button>
+        <button ui-sref="services">Get started!</button>
       </div>
       <div>
         <h2>{{cms.home.sections.sectionOne.widgets.w2.title}}</h2>
@@ -21,7 +20,6 @@
       </div>
     </div>
   </section>
-</section>
 <!-- early bird special -->
 <section class="home-page-widgets early-bird bg-img">
   <h1>{{cms.home.sections.sectionTwo.title}}</h1>
@@ -30,12 +28,12 @@
   <div class="timer-container">
     <p>{{cms.home.sections.sectionTwo.specialTitle}}</p>
     <h2>{{cms.home.sections.sectionTwo.specialSubtitle}}</h2>
-    <h2 id="early-bird-counter">{{earlyBirdTimerD}}:{{earlyBirdTimerH}}:{{earlyBirdTimerM}}:{{earlyBirdTimerZ}}{{earlyBirdTimerS}}</h2>
+    <h3 id="early-bird-counter">{{earlyBirdTimerD}} Days {{earlyBirdTimerH}}:{{earlyBirdTimerM}}:{{earlyBirdTimerZ}}{{earlyBirdTimerS}}</h3>
     <div style="margin-left:10px;">
-      <span>Days</span><span>Hours</span><span style="margin-left:40px;">Minutes</span><span>Seconds</span>
+      <!-- <span>Days</span><span>Hours</span><span style="margin-left:40px;">Minutes</span><span>Seconds</span> -->
     </div>
   </div>
-  <div class="early-bird-cta" ui-sref="services">{{cms.home.sections.sectionTwo.button}}</div>
+  <div class="early-bird-cta" ui-sref="services.coursesAvailable">{{cms.home.sections.sectionTwo.button}}</div>
 </section>
 
 <section class="home-page-about">
@@ -64,7 +62,7 @@
 <section class="para wrap1 parallax">
   <div class="overlay-light">
     <h1>Bring your business to new heights</h1>
-    <h2>We have some of the most advanced excel training programs in the regon</h2>
+    <h2>We have some of the most advanced excel training programs in the region</h2>
   </div>
 </section>
 
@@ -73,12 +71,5 @@
     <h3>The best advice in life is free</h3>
     <h2>check out our newsletter</h2>
     <div class="cta-button-md" ui-sref="excelTips.subscribe">Sign Up Now</div>
-  </div>
-</section>
-
-<section class="para wrap2 parallax ">
-  <div class="overlay-light">
-    <h1>Lets make a deal!</h1>
-    <h2>We have some of the most advanced excel training programs in the regon</h2>
   </div>
 </section>

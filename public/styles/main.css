@@ -18,7 +18,7 @@ h2{
   background:
 }
 .home-page-widgets{
-  z-index: 14;
+  z-index: 14000;
   width: 100%;
   min-height: 100vh;
   background: white;
@@ -91,6 +91,12 @@ h2{
   margin: -10px 0 0 0px;
   padding: 0px;
 }
+.timer-container h3{
+  color: black;
+  font-size: 1rem;
+  margin: -10px 0 0 0px;
+  padding: 0px;
+}
 .timer-container span{
   color: black;
   font-size: 2rem;
@@ -99,7 +105,7 @@ h2{
 }
 #early-bird-counter {
   color: black;
-  font-size: 9rem;
+  font-size: 7.5rem;
   margin: 10px;
   padding: 0px;
 }
@@ -423,7 +429,7 @@ color: rgba(0,0,0, 1)
   display: flex;
   justify-content: center;
   /*align-items: center;*/
-  margin: -10px 0 0 0;
+  margin: 5px 0 0 0;
   width: 100%;
   height: 90vh;
 }
@@ -485,7 +491,7 @@ color: rgba(0,0,0, 1)
 .add-course{
   opacity: 1;
   z-index: 5;
-  position: absolute;
+  position: fixed;
   font-size: 2rem;
   color: white;
   display: flex;
@@ -493,7 +499,7 @@ color: rgba(0,0,0, 1)
   align-items: center;
   width: 39.9%;
   right: 0;
-  margin: 0 0 29px 0;
+  margin: 0 0 0 0;
   height: 40px;
   background: #52B529;
   bottom: 0;
@@ -506,7 +512,7 @@ color: rgba(0,0,0, 1)
 .add-course-underlay{
   z-index: 4;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   font-size: 2rem;
   color: white;
   display: flex;
@@ -958,7 +964,7 @@ left:0;
 width: 100%;
 }
 .areallybadidea{
-  z-index: 120;
+  z-index: 12;
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -1045,10 +1051,9 @@ width: 100px;
   position: absolute;
   display: none;
   width: 120px;
-  min-height: 100px;
   background: #52b529;
   left:-20px;
-  bottom: -106px;
+  bottom: -70px;
 }
 .dropdown-li li{
   width: 100%;
@@ -1147,4 +1152,34 @@ margin: 10px;
   height: 100%;
   background: rgba(0,0,0, .3);
   color: white;
+}
+/*Class Management*/
+.classManage{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start ;
+  align-items: center;
+}
+.classManage div{
+  width: 100%;
+}
+.classManage-student{
+  padding: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border:2px solid black
+}
+.classManage-student button{
+  width: 200px;
+  height: 40px;
+}
+/*customerReportWrap page*/
+.customerReportWrap{
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

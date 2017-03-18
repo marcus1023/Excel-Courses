@@ -133,6 +133,21 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/adminTools/cmsinput/cms-contact.html",
           controller: "mainController"
       })
+      .state("courseManagement",{
+          url:'/courseManagement',
+          templateUrl: "./JS/templates/adminTools/classManagement.html",
+          controller: "courseManagement"
+      })
+      .state("customerReport",{
+          url:'/customerReport',
+          templateUrl: "./JS/templates/CustomerReport.html",
+          controller: "customerReport"
+      })
+      .state("courseManagement.student",{
+          url:'/student',
+          templateUrl: "./JS/templates/popups/studentReport.html",
+          controller: "courseManagement"
+      })
       //payments STUFF
       .state("stripePayment",{
           url:'/stripePayment',
@@ -142,6 +157,6 @@ angular.module('excelCourses',  ['ui.router'])
 
 
         $urlRouterProvider
-        .when('/', '/select')
+        .when('/', '/home')
             .otherwise('/');
     });

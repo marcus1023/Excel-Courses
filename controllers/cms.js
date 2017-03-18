@@ -3,7 +3,7 @@ var session = require('express-session');
 var fs = require('fs');
 let app = require('../server.js') ;
 var massive = require('massive');
-var massiveInstance = massive.connectSync({connectionString :"postgres://fttsyrkr:8f1-v4wG_mbqob8QnuGtAp15hdrFfCtd@babar.elephantsql.com:5432/fttsyrkr"})
+var massiveInstance = massive.connectSync({connectionString :"postgres://fttsyrkr:mLitX6Hyis07JVHiupoyxiTV2Owlc_CR@babar.elephantsql.com:5432/fttsyrkr"})
 app.set('db', massiveInstance);
 var db = app.get('db');
 

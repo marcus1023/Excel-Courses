@@ -1,4 +1,5 @@
 var express = require('express');
+var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -41,6 +42,7 @@ app.use(session({
 	}
 }));
 
+
 // system API routes
 	app.post('/api/createNewUser', usersCtlr.createNewUser);
 	app.post('/api/authenticate', usersCtlr.authenticate);
@@ -53,6 +55,8 @@ app.use(session({
 	app.post('/api/selectCourse', usersCtlr.selectCourse);
 	app.post('/api/saveNewTesty', usersCtlr.saveNewTesty);
 	app.post('/api/confirmCohort', usersCtlr.confirmCohort);
+	app.post('/api/addPeopleToClass', usersCtlr.addPeopleToClass);
+	app.post('/api/confirmPayment', usersCtlr.confirmPayment);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
@@ -60,10 +64,37 @@ app.use(session({
 	app.get('/api/getAllevents', usersCtlr.getAllevents);
 	app.get('/api/getTestys', usersCtlr.getTestys);
 	app.get('/api/getebTimer', usersCtlr.getebTimer);
-
+	app.get('/api/getAllStudents', usersCtlr.getAllStudents);
 
 	//EMAIL OUTLINE BEGIN
 	app.post('/api/contactEmail', function handleSayHello(req, res) {
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'marcuslogden@gmail.com', // Your email id
+            pass: 'NCCode24' // Your password
+        }
+    });
+		var message = req.body.message
+		var name = req.body.name
+		var email = req.body.email
+		var mailOptions = {
+		    from: 'marcuslogden@gmail.com', // sender address
+		    to: email, // list of receivers
+		    subject: 'New Excell Infinity Contact!', // Subject line
+		    html: '<b>New email from: </b>' + name + '<br><br>' + '<b>Message:</b> ' + message //, // plaintext body
+		};
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        console.log(error);
+		        res.json({yo: 'error'});
+		    }else{
+		        console.log('Message sent: ' + info.response);
+		        res.json({yo: info.response});
+		    };
+		});
+});
+	app.post('/api/sendConfirmationEmail', function handleSayHello(req, res) {
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -79,7 +110,6 @@ app.use(session({
 		    to: email, // list of receivers
 		    subject: 'New Excell Infinity Contact!', // Subject line
 		    html: '<b>New email from: </b>' + name + '<br><br>' + '<b>Message:</b> ' + message //, // plaintext body
-		    // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
 		};
 		transporter.sendMail(mailOptions, function(error, info){
 		    if(error){
@@ -90,6 +120,42 @@ app.use(session({
 		        res.json({yo: info.response});
 		    };
 		});
+});
+	app.post('/api/sendRegisteredEmail', function handleSayHello(req, res) {
+		let emailCont = req.body
+		let cohortId = req.body.currentClient.cohort
+		let total = req.body.currentClient.total
+		let clientName = emailCont.currentClient.info.pasportName
+		let clientId = emailCont.currentClient.userid
+		let clientEmail = emailCont.currentClient.info.email
+		console.log(req.body)
+		db.getSingleCohort([cohortId ], function (err, result) {
+			cohortinfo = result[0]
+		let cohortDates = cohortinfo.datebeauty + "through" +cohortinfo.datebeauty2
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'marcuslogden@gmail.com', // Your email id
+            pass: 'NCCode24' // Your password
+        }
+    });
+		var email = req.body.email
+		var mailOptions = {
+		    from: 'marcuslogden@gmail.com', // sender address
+		    to: clientEmail, // list of receivers
+		    subject: 'New Excell Infinity Registry!', // Subject line
+		    html: '<b>New email from: </b>Excel Infinity' + '<br><br>' + '<b>Message:</b><p>Hey there! Looks like you registered for a course with excel infinity</p><h4>Account Info</h4><br><p>Name: '+clientName+'<b></b></p><br><p>Customer Id: '+clientId+'<b></b></p><br><p>Payment Made: Yes<b></b></p><br><p>Payment Ammount: '+total+'<b></b></p><br><p>Course Id: '+cohortId+'<b></b></p><br><p>Course Dates: '+cohortDates+'<b></b></p><br> ' //, // plaintext body
+		};
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        console.log(error);
+		        res.json({yo: 'error'});
+		    }else{
+		        console.log('Message sent: ' + info.response);
+		        res.json({yo: info.response});
+		    };
+		});
+	})
 });
 
 //EMAIL OUTLINE ENDED

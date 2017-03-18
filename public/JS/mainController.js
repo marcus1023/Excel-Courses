@@ -1,6 +1,10 @@
 angular.module('excelCourses').controller('mainController', function(mainService, $scope, $interval, $compile, $state  ){
 
 $scope.slotsAvailable = 5;
+$scope.coursePrice = 600;
+$scope.mentorPrice = 200;
+$scope.consultancyPrice = 250;
+
 
 $scope.earlyBirdTimerD = 30
 $scope.earlyBirdTimerH = 30
@@ -23,18 +27,16 @@ $scope.earlyBirdTimerZ;
       $scope.earlyBirdTimerM -= 1
       $scope.earlyBirdTimerS = 60
       if($scope.earlyBirdTimerM <= 0){
-        $scope.earlyBirdTimerM = "fin"
-        $scope.earlyBirdTimerS = "shed"
+        location.reload();
       }
     }
   }, 1500);
 $scope.getebTimer = function(){
   mainService.getebTimer().then(function(res){
     let ebTimer = res.data
-    $scope.earlyBirdTimerD = ebTimer.days
+    $scope.earlyBirdTimerD = ebTimer.days - 30
     $scope.earlyBirdTimerH = ebTimer.hours
     $scope.earlyBirdTimerM = ebTimer.minutes
-   console.log('heeelo',res.data)
     })
 }
 $scope.getebTimer()
@@ -112,17 +114,33 @@ $scope.getTestys = function(){
     })
 }
 $scope.getTestys();
+
 //events control
+$scope.manageClass = function(id){
+  console.log(id)
+  console.log($scope.events)
+  for(let i = 0; i < $scope.events.length; i++){
+    if($scope.events[i].id === id){
+      $scope.eventToManage = $scope.events[i]
+    }
+}
+console.log($scope.eventToManage)
+}
 $scope.getAllevents = function(){
   mainService.getAllevents().then(function(res){
     $scope.events = []
-    for(let i = 0; i < res.data.length; i++){
-      $scope.events.push(res.data[i])
+    $scope.eventsShow = []
+    for(let i = 0; i < res.data[0].length; i++){
+      $scope.events.push(res.data[0][i])
+    }
+    for(let i = 0; i < res.data[1].length; i++){
+      $scope.eventsShow.push(res.data[1][i])
     }
     })
 }
 $scope.getAllevents()
-$scope.newCourseMonth = [{name:'January', number: 1},{name:'Feburay', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
+
+$scope.newCourseMonth = [{name:'January', number: 1},{name:'February', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
 $scope.newCourseDay = [{day:1},{day:2},{day:3},{day:4},{day:5},{day:6},{day:7},{day:8},{day:9},{day:10},{day:11},{day:12},{day:13},{day:14},{day:15},{day:16},{day:17},{day:18},{day:19},{day:20},{day:21},{day:22},{day:23},{day:24},{day:25},{day:26},{day:27},{day:28},{day:29},{day:30},{day:31}]
 $scope.newCourseYear = [{year: 2017},{year: 2018},{year: 2019},{year: 2020}]
 $scope.newCourseMonth2 = [{name:'January', number: 1},{name:'Feburay', number: 2},{name:'March', number: 4},{name:'April', number: 4},{name:'May', number: 5},{name:'June', number: 6}, {name:'July', number: 7}, {name:'August', number: 8}, {name:'September', number: 9}, {name:'October', number: 10}, {name:'November', number: 11}, {name:'December', number: 12}]
@@ -159,31 +177,39 @@ $scope.addToSubscript = function(subscriber){
   $scope.activateButtons = false
   $scope.revealButtons = function(){
       $scope.activateButtons = true
-      console.log($scope.currentClient.cohort)
-      data = {cohort:$scope.currentClient.cohort , id: $scope.currentClient.userid}
+      console.log($scope.runningTotal)
+      data = {cohort:$scope.currentClient.cohort , id: $scope.currentClient.userid, name: $scope.currentClient.info.pasportName, fullPayment:$scope.runningTotal}
+      let Emaildata = {currentClient:$scope.currentClient, total: $scope.runningTotal, cohort:$scope.currentClient.cohort}
       mainService.confirmCohort(data).then(function(res){
-        console.log('cohort confirmed')
+        console.log(res.data)
+        })
+      mainService.sendRegisteredEmail(Emaildata).then(function(res){
+        console.log('email send')
         })
   }
   $scope.newClient = function(client){
-    mainService.newClient(client).then(function(res){
-      $scope.currentClient = res.data
-      console.log($scope.currentClient)
-      $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
-      });
+    client.cohort = $scope.currentClient.cohort
+    if(client.address && client.birthDate && client.email && client.pasport && client.pasportName && client.phone && client.postalCode && client.preferName){
+      console.log(client)
+      mainService.newClient(client).then(function(res){
+        $scope.currentClient = res.data
+        console.log($scope.currentClient)
+        $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
+       });
+    }
   }
   $scope.getClient = function(){
     mainService.getClient().then(function(res){
       $scope.currentClient = res.data
-      console.log($scope.currentClient)
       $scope.runningTotal = 0;
       $scope.stripeTotal = 0;
-      if($scope.currentClient){
+      if($scope.currentClient.purchaseType){
         for(var i = 0; i < $scope.currentClient.purchaseType.length; i++){
           $scope.runningTotal += $scope.currentClient.purchaseType[i].price
           if($scope.currentClient.savingsType[0]){
             $scope.runningTotal += $scope.currentClient.savingsType[i].price
           }
+          console.log($scope.runningTotal)
           mainService.runningTotal({total:$scope.runningTotal}).then(function(res){
             })
         }
@@ -200,6 +226,15 @@ $scope.addToSubscript = function(subscriber){
         })
     }
   }
+$scope.addPeopleToClass = function(data){
+  let addingData = {number:data.number,cohort:$scope.currentClient.cohort, userid: $scope.currentClient.userid, name: $scope.currentClient.info.pasportName}
+  mainService.addPeopleToClass(addingData).then(function(res){
+    $scope.currentClient = res.data
+    console.log($scope.currentClient)
+    location.reload();
+
+    })
+}
 // Contact Box
 $('#custom-contact-success').hide();
 $scope.contactEmail = function(contactMail){

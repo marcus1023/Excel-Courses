@@ -14,8 +14,9 @@
 </head>
 <body>
   <main>
-    <main-head ng-hide="currentUser.type === 'admin'" ></main-head>
-    <admin-head ng-hide="currentUser.type !== 'admin'" ></admin-head>
+
+      <main-head ng-hide="currentUser.type === 'admin'" ></main-head>
+      <admin-head ng-hide="currentUser.type !== 'admin'" ></admin-head>
     <ui-view></ui-view>
   </main>
 </body>
@@ -28,9 +29,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- Stripe! -->
 <script src="https://checkout.stripe.com/checkout.js"></script>
-
 <script src="./JS/app.js"></script>
 <script src="./JS/mainController.js"></script>
+<script src="./JS/controllers/courseManagement.js"></script>
+<script src="./JS/controllers/customerReport.js"></script>
 <script src="./JS/mainService.js"></script>
 <script src="./JS/directives/main-head.js"></script>
 <script src="./JS/directives/admin-head.js"></script>

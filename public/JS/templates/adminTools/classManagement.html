@@ -1,0 +1,32 @@
+
+<section class="dashboard-wrap">
+  <section class="classManage">
+    <div class="single-event" ng-repeat="event in events">
+      <h4>Course: {{event.name}}</h4>
+      <p>Start: {{event.datebeauty}}</p>
+      <p>End: {{event.datebeauty2}}</p>
+      <button class="cta-button-md" style="float: right;" ng-click="getStudentsinClass(event)">Manage</button>
+    </div>
+  </section>
+  <section class="classManage">
+    <h2>COURSE: {{EventName}}</h2>
+    <h4>Students unConfirmed</h4>
+    <div class="classManage-student" ng-repeat="student in managedStudents">
+      <p>Name: {{student.pasportname}}</p>
+      <p>Registration:{{student.id}}</p>
+      <p>Confirmed: No</p>
+      <button class="cta-button-sm" ng-click="confirmPayment(student.id)">Confirm Payment</button>
+    </div>
+    <h4>Students Confirmed</h4>
+    <p>(Students who have confirmed payment)</p>
+    <div class="classManage-student" ng-repeat="student in managedStudentsConfirmed">
+      <div>
+        <p>Name: {{student.pasportname}}</p>
+        <p>Registration:{{student.id}}</p>
+        <p>Payment Confirmed: Yes</p>
+      </div>
+      <button class="cta-button-sm" ng-click="getReport(student)" ui-sref="courseManagement.student">See Report</button>
+    </div>
+  </section>
+</section>
+<ui-view></ui-view>

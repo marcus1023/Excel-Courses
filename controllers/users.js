@@ -1,6 +1,6 @@
 let app = require('../server.js') ;
 var massive = require('massive');
-var massiveInstance = massive.connectSync({connectionString :"postgres://fttsyrkr:8f1-v4wG_mbqob8QnuGtAp15hdrFfCtd@babar.elephantsql.com:5432/fttsyrkr"})
+var massiveInstance = massive.connectSync({connectionString :"postgres://fttsyrkr:mLitX6Hyis07JVHiupoyxiTV2Owlc_CR@babar.elephantsql.com:5432/fttsyrkr"})
 app.set('db', massiveInstance);
 var db = app.get('db');
 
@@ -11,32 +11,65 @@ module.exports = {
     let email = data.email
     let type = data.type
     db.createNewUser([fullName, email,type ], function (err, result) {
-      console.log(result,err)
     })
   },
   confirmCohort: function (req, res) {
-    let data = req.body
-    console.log(data)
-    let cohort = data.cohort
-    let id = '{'+ data.id +'}'
-    db.confirmCohort([id,cohort], function (err, result) {
-      console.log(result,err)
+    req.session.client.fullPayment = req.body.fullPayment
+    let data = req.body;
+    let cohort = data.cohort;
+    let id = '{'+ data.id +'}';
+    let name = '{'+ req.body.name + ":" +data.id +'}';
+    let studentId = data.id;
+    db.updatePayment([studentId,req.session.client.fullPayment ], function (err, result) {
+      console.log(err,result)
     })
+    db.getCohortList([cohort], function (err, result) {
+      let studentsArr = result[0].students;
+      if(studentsArr){
+        if(studentsArr.indexOf(studentId) !== -1){
+           res.send("User already in cohort!")
+        }else{
+          db.confirmCohort([id,cohort], function (err, result) {
+            console.log(err,result)
+          })
+          db.confirmCohortName([name,cohort], function (err, result) {
+            console.log(err,result)
+            res.send("User put in cohort!")
+          })
+        }
+      }
+    })
+  },
+  addPeopleToClass: function (req, res) {
+    let cohort = req.body.cohort
+    let number = req.body.number
+    req.session.client.peopleinCohort = number
+    for(i = 0; i < number; i++){
+      let id = '{'+ req.body.userid + i +'}'
+      let name = '{'+ req.body.name + i +'}'
+      req.session.client.purchaseType.push({ type: 'Excel Course', price: 600, id: 1 })
+      req.session.client.savingsType.push({ type: 'Extra Student', price: -50 })
+      db.confirmCohort([id,cohort], function (err, result) {
+        console.log(err,result)
+      })
+      db.addChildren([id,req.body.userid], function (err, result) {
+        console.log(err,result)
+      })
+    }
+    res.send(req.session.client)
   },
   addToSubscript: function (req, res) {
     let data = req.body
     let fullName = data.name
     let email = data.email
     let type = data.type
-    console.log("got to add subscriber",req.body)
     db.addToSubscript([fullName, email,type ], function (err, result) {
-      console.log(result,err)
       res.send("User Saved!")
     })
   },
   authenticate: function (req, res) {
-    let password = req.body.password; console.log(password)
-    let email = req.body.email; console.log(email)
+    let password = req.body.password;
+    let email = req.body.email;
     db.authenticate([email], function (err, result) {
       if(result[0]){
         if(password === result[0].password ){
@@ -99,11 +132,9 @@ module.exports = {
       }
       if(req.session.client.savingsTypeLog.indexOf(1) !== -1 && req.session.client.savingsTypeLog.indexOf(2) !== -1 && mentoringCashe === 0){
         req.session.client.savingsType.push({type:'1-1 Mentoring', price:-50})
-        console.log(req.session.client.savingsType)
       }
       if(req.session.client.savingsTypeLog.indexOf(1) !== -1 && req.session.client.savingsTypeLog.indexOf(3) !== -1 && consultancyCashe === 0){
         req.session.client.savingsType.push({type:'Excel Consultancy', price:-50})
-        console.log(req.session.client.savingsType)
       }
     }
     for(let i = 0; i < req.session.client.purchaseType.length; i++){
@@ -122,15 +153,17 @@ module.exports = {
     let postalCode = data.postalCode
     let phone = data.phone
     let birthDate = data.birthDate
+    let cohort = data.cohort
+    console.log(cohort)
     let type = 'client'
     if(!req.session.client){
       req.session.client = {}
     }
     req.session.client.info = data;
     req.session.client.paymentReady = true;
-    db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type ], function (err, result) {
+    db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type,cohort, 0 ], function (err, result) {
+      console.log(err,result)
       db.getuserfromuser([preferName], function (err, result) {
-        console.log(result[0].id)
         req.session.client.userid = result[0].id
         res.send(req.session.client)
       })
@@ -147,7 +180,6 @@ module.exports = {
     res.send(req.session.client)
   },
   createEvent: function (req, res) {
-    console.log(req.body)
     let name = req.body.name
     let month = req.body.month.number
     let day = req.body.day.day
@@ -162,7 +194,6 @@ module.exports = {
     let dateCalc2 = year2+'.'+month2+'.'+day2
     let dateBeauty2 = day2+ ' - ' +req.body.month2.name+' - '+year2
     let unxDate2 = new Date(dateCalc2).getTime() / 1000
-    console.log('dateBeauty2',dateBeauty2,'unxDate2',unxDate2)
     db.createEvent([name,unxDate,dateBeauty,unxDate2,dateBeauty2], function(err,result){
       res.send('event logged')
       })
@@ -171,6 +202,7 @@ module.exports = {
     db.getAllevents(function(err,result){
       let unxDate = Math.round(new Date().getTime() / 1000)
       let eventCalc = []
+      let eventCalcShow = []
       let earlyBirdCalc = []
       for(let i = 0; i < result.length; i++){
         if(result[i].coursedate > unxDate){
@@ -178,6 +210,9 @@ module.exports = {
         }
         if(result[i].coursedate > (unxDate + 2629743)){
           earlyBirdCalc.push(result[i].coursedate)
+        }
+        if(result[i].students === null || result[i].students.length < 9){
+          eventCalcShow.push(result[i])
         }
       }
       let newEBArr = earlyBirdCalc.sort()
@@ -190,7 +225,7 @@ module.exports = {
       delta -= ebMinutes * 60;
       let ebTimer = {days:ebDays, hours: ebHours, minutes:ebMinutes}
       req.session.ebTimer = ebTimer
-      res.send(eventCalc)
+      res.send([eventCalc, eventCalcShow])
       })
   },
   getebTimer: function (req, res) {
@@ -201,18 +236,15 @@ module.exports = {
       req.session.client = []
     }
     req.session.client.cohort = req.body.id
-    console.log(req.session.client.cohort)
     res.send(req.session.client)
   },
   saveNewTesty: function (req, res) {
-    console.log(req.body)
     let data = req.body
     let name = data.name
     let location = data.location
     let body = data.testy
     db.saveNewTesty([name,location,body], function(err,result){
       res.send('testy logged')
-      console.log(err)
       })
   },
   getTestys: function (req, res) {
@@ -220,5 +252,24 @@ module.exports = {
       req.session.testimonials = result
       res.send(req.session.testimonials)
       })
+  },
+
+  // GET ALL  STUDENTS
+  getAllStudents: function (req, res) {
+    db.getAllStudents(function(err,result){
+      res.send(result)
+      })
+  },
+  confirmPayment: function (req, res) {
+    console.log("confirm",req.body)
+    let id = req.body.id
+    let refId = "{"+req.body.id+"}"
+    let course = req.body.course
+    db.confirmPayment([id, 1],function(err,result){
+      console.log(result,err)
+    })
+    db.updateStudentsConfirmed([course, refId],function(err,result){
+      console.log(result,err)
+    })
   }
 }

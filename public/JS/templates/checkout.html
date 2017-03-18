@@ -3,17 +3,18 @@
     <h4>Take advantage of these deals!</h4>
     <div>
       <p>Register for both course and 1-1 Mentoring and get a 50% off the latter. </p>
-      <div class="cta-button-sm" ng-click="purchaseType({type:'1-1 Mentoring', price:200, id: 2})">Add Mentoring to Order</div>
+      <div class="cta-button-sm" ng-click="purchaseType({type:'1-1 Mentoring', price:mentorPrice, id: 2})">Add Mentoring to Order</div>
     </div>
     <div>
       <p>Register for  both course and Consultancy now to get 50% off the latter. </p>
-      <div class="cta-button-sm" ng-click="purchaseType ({type:'Excel Consultancy', price:350, id: 3})">Add Consultancy to Order</div>
+      <div class="cta-button-sm" ng-click="purchaseType ({type:'Excel Consultancy', price:consultancyPrice, id: 3})">Add Consultancy to Order</div>
     </div>
     <div style=" border-bottom: 1px solid #52B529;">
       <p>Add additional people to your course and save 50$ per person.</p>
       <select ng-model='addPeople.number' class="cta-button-sm"  style="width:94%;" ng-options='number.number for number in addPeople'>
         <option value="" >Select</option>
       </select>
+      <div class="cta-button-sm" ng-click="addPeopleToClass(addPeople.number)">Add People</div>
     </div>
   </section>
   <section class="payment-dash checkout-summary">

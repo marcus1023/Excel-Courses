@@ -1,0 +1,13 @@
+<section class="popup-black" ui-sref="courseManagement"></section>
+<section class="popup-container">
+  <section class="popup-wrap">
+    <div class="service-tab" style="width:100%; border: none; height: auto;" >
+      <h4>Client: <b>{{currentStudent.pasportname}}</b></h4>
+      <p>Payment Confirmed: <b>Yes</b></p>
+      <p ng-hide="!currentStudent.children">Additional Students: <b>{{currentStudent.children.length}}</b></p>
+      <p ng-hide="currentStudent.children">Additional Students: <b>None</b></p>
+      <p>Email: <b>{{currentStudent.email}}</b></p>
+      <p>Phone: <b>{{currentStudent.phone}}</b></p>
+    </div>
+  </section>
+</section>
