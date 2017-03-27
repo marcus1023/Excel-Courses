@@ -17,10 +17,19 @@ h2{
 .white{
   background:
 }
+.floating-home{
+  position: fixed;
+  height: 80vh;
+  width: 90%;
+  z-index: 4000000;
+  top: 30px;
+  left: 5%;
+  right: 5%;
+}
 .home-page-widgets{
   z-index: 14000;
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   background: white;
   display: flex;
   flex-direction: column;
@@ -811,7 +820,6 @@ text-align: center;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .checkout-wrap section{
   margin: 40px;
@@ -1182,4 +1190,14 @@ margin: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.voucher-input input{
+  font-size: 1rem;
+  padding: 3px;
+  width:91%;
+  margin: 0 0 0 12px;
+  border: 1px solid #52b529;
+}
+.voucher-input{
+  width: 100%;
 }

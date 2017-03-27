@@ -97,7 +97,7 @@ $scope.cmsConnect = function(){
 }
 $scope.cmsConnect();
 $scope.saveCms = function(newCms){
-  console.log(newCms)
+  /*console.log(newCms)*/
   mainService.saveCms(newCms).then(function(res){
     $scope.cmsConnect()
     })
@@ -117,14 +117,14 @@ $scope.getTestys();
 
 //events control
 $scope.manageClass = function(id){
-  console.log(id)
-  console.log($scope.events)
+  /*console.log(id)*/
+  /*console.log($scope.events)*/
   for(let i = 0; i < $scope.events.length; i++){
     if($scope.events[i].id === id){
       $scope.eventToManage = $scope.events[i]
     }
 }
-console.log($scope.eventToManage)
+/*console.log($scope.eventToManage)*/
 }
 $scope.getAllevents = function(){
   mainService.getAllevents().then(function(res){
@@ -178,22 +178,22 @@ $scope.addToSubscript = function(subscriber){
   $scope.revealButtons = function(){
       $scope.activateButtons = true
       console.log($scope.runningTotal)
-      data = {cohort:$scope.currentClient.cohort , id: $scope.currentClient.userid, name: $scope.currentClient.info.pasportName, fullPayment:$scope.runningTotal}
+      data = {payment: $scope.runningTotal, cohort:$scope.currentClient.cohort , id: $scope.currentClient.userid, name: $scope.currentClient.info.pasportName}
       let Emaildata = {currentClient:$scope.currentClient, total: $scope.runningTotal, cohort:$scope.currentClient.cohort}
       mainService.confirmCohort(data).then(function(res){
-        console.log(res.data)
-        })
-      mainService.sendRegisteredEmail(Emaildata).then(function(res){
-        console.log('email send')
         })
   }
   $scope.newClient = function(client){
-    client.cohort = $scope.currentClient.cohort
+    if($scope.currentClient.cohort){
+      client.cohort = $scope.currentClient.cohort
+    }
     if(client.address && client.birthDate && client.email && client.pasport && client.pasportName && client.phone && client.postalCode && client.preferName){
-      console.log(client)
+      /*console.log(client)*/
       mainService.newClient(client).then(function(res){
         $scope.currentClient = res.data
-        console.log($scope.currentClient)
+        $scope.currentClient.termsAgreed = false
+                console.log($scope.currentClient)
+        /*console.log($scope.currentClient)*/
         $scope.alert = "Success! Please accept the terms and conditions and select a payment method"
        });
     }
@@ -201,6 +201,7 @@ $scope.addToSubscript = function(subscriber){
   $scope.getClient = function(){
     mainService.getClient().then(function(res){
       $scope.currentClient = res.data
+      console.log($scope.currentClient)
       $scope.runningTotal = 0;
       $scope.stripeTotal = 0;
       if($scope.currentClient.purchaseType){
@@ -209,12 +210,12 @@ $scope.addToSubscript = function(subscriber){
           if($scope.currentClient.savingsType[0]){
             $scope.runningTotal += $scope.currentClient.savingsType[i].price
           }
-          console.log($scope.runningTotal)
+          /*console.log($scope.runningTotal)*/
           mainService.runningTotal({total:$scope.runningTotal}).then(function(res){
             })
         }
         $scope.stripeTotal = $scope.runningTotal * 100
-        console.log($scope.currentClient)
+        /*console.log($scope.currentClient)*/
       }
       });
   }
@@ -230,9 +231,20 @@ $scope.addPeopleToClass = function(data){
   let addingData = {number:data.number,cohort:$scope.currentClient.cohort, userid: $scope.currentClient.userid, name: $scope.currentClient.info.pasportName}
   mainService.addPeopleToClass(addingData).then(function(res){
     $scope.currentClient = res.data
-    console.log($scope.currentClient)
+    /*console.log($scope.currentClient)*/
     location.reload();
 
+    })
+}
+$scope.deferPayment = function(e){
+  let data = {}
+  if(e === 'true'){
+     data = {deferPayment: true}
+  }else if(e === false){
+     data = {deferPayment: false}
+  }
+  mainService.deferPayment(data).then(function(res){
+    console.log(res)
     })
 }
 // Contact Box
@@ -264,41 +276,6 @@ $scope.contactEmail = function(Mail){
 }
 
 //paypalobjects
-/*paypal.Button.render({
-
-     env: 'sandbox', // Optional: specify 'sandbox' environment
-
-     client: {
-         sandbox:    'AUVKm6PaBOwm5jOyRasoKwxEIfGHFuN2BjYeneEXJa3ci7zw8UIDKcBd-smVq_ANq17KwYFkE7icLUNF',
-         production: 'xxxxxxxxx'
-     },
-
-     payment: function() {
-
-         var env    = this.props.env;
-         var client = this.props.client;
-
-         return paypal.rest.payment.create(env, client, {
-             transactions: [
-                 {
-                     amount: { total: $scope.runningTotal, currency: 'USD' }
-                 }
-             ]
-         });
-     },
-
-     commit: true, // Optional: show a 'Pay Now' button in the checkout flow
-
-     onAuthorize: function(data, actions) {
-
-         // Optional: display a confirmation page here
-
-         return actions.payment.execute().then(function() {
-             // Show a success page to the buyer
-         });
-     }
-
- }, '#paypal-button');*/
 
 // Stripe
 var handler = StripeCheckout.configure({

@@ -57,6 +57,10 @@ app.use(session({
 	app.post('/api/confirmCohort', usersCtlr.confirmCohort);
 	app.post('/api/addPeopleToClass', usersCtlr.addPeopleToClass);
 	app.post('/api/confirmPayment', usersCtlr.confirmPayment);
+	app.post('/api/getClassSize', usersCtlr.getClassSize);
+	app.post('/api/addEBspecial', usersCtlr.addEBspecial);
+	app.post('/api/holyshit', usersCtlr.holyshit);
+	app.post('/api/deferPayment', usersCtlr.deferPayment);
 	app.get('/api/connectUser', usersCtlr.connectUser);
 	app.get('/api/getClient', usersCtlr.getClient);
 	app.get('/api/cmsConnect', cms.cmsConnect);
@@ -65,6 +69,9 @@ app.use(session({
 	app.get('/api/getTestys', usersCtlr.getTestys);
 	app.get('/api/getebTimer', usersCtlr.getebTimer);
 	app.get('/api/getAllStudents', usersCtlr.getAllStudents);
+	app.get('/api/getClassClient', usersCtlr.getClassClient);
+
+
 
 	//EMAIL OUTLINE BEGIN
 	app.post('/api/contactEmail', function handleSayHello(req, res) {
@@ -156,6 +163,32 @@ app.use(session({
 		    };
 		});
 	})
+});
+	app.post('/api/sendDeferPaymentEmail', function handleSayHello(req, res) {
+		console.log('sendDeferPaymentEmail',req.body)
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'marcuslogden@gmail.com', // Your email id
+            pass: 'NCCode24' // Your password
+        }
+    });
+		var email = req.body.email
+		var mailOptions = {
+		    from: 'marcuslogden@gmail.com', // sender address
+		    to: 'marcus@userlite.com', // list of receivers
+		    subject: 'New Excell Infinity Registry!', // Subject line
+		    html: '<b>New email from: </b>Excel Infinity' + '<br><br>' + '<b>Message:</b><p>Hey there! Looks like you registered for a course with excel infinity</p><h4>Account Info:</h4><br><p>Name: '+req.body.name+'<b></b></p><br><p>Customer Id: '+req.body.id+'<b></b></p><br><p>Payment Made: Yes<b></b></p><br><p>Payment Amount: '+req.body.amount+'<b></b></p><br><p>Course Id: '+req.body.courseId+'<b></b></p><br><p>Course Dates: '+req.body.dates.start+' - '+req.body.dates.end+'<b></b></p><br> ' //, // plaintext body
+		};
+		transporter.sendMail(mailOptions, function(error, info){
+		    if(error){
+		        console.log(error);
+		        res.json({yo: 'error'});
+		    }else{
+		        console.log('Message sent: ' + info.response);
+		        res.json({yo: info.response});
+		    };
+		});
 });
 
 //EMAIL OUTLINE ENDED

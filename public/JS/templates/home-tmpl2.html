@@ -1,0 +1,77 @@
+<section class="popup-black" ui-sref="home" style="z-index: 3900000;"></section>
+<section class="floating-home">
+  <section class="home-page-widgets">
+    <h1>{{cms.home.sections.sectionOne.title}}</h1>
+    <h2>{{cms.home.sections.sectionOne.subtitle}}</h2>
+    <div class="widget-container">
+      <div>
+        <h2>{{cms.home.sections.sectionOne.widgets.w1.title}}</h2>
+        <p>{{cms.home.sections.sectionOne.widgets.w1.body}}</p>
+        <button ui-sref="services">Get started!</button>
+      </div>
+      <div>
+        <h2>{{cms.home.sections.sectionOne.widgets.w2.title}}</h2>
+        <p>{{cms.home.sections.sectionOne.widgets.w2.body}}</p>
+        <button ui-sref="services.mentor">Get started!</button>
+      </div>
+      <div>
+        <h2>{{cms.home.sections.sectionOne.widgets.w3.title}}</h2>
+        <p>{{cms.home.sections.sectionOne.widgets.w3.body}}</p>
+        <button ui-sref="services.consult">Get started!</button>
+      </div>
+    </div>
+  </section>
+</section>
+<!-- early bird special -->
+<section class="home-page-widgets early-bird bg-img">
+  <h1>{{cms.home.sections.sectionTwo.title}}</h1>
+  <h2>{{cms.home.sections.sectionTwo.subtitle}}</h2>
+    <h3>There are {{slotsAvailable}} left in our next class!</h3>
+  <div class="timer-container">
+    <p>{{cms.home.sections.sectionTwo.specialTitle}}</p>
+    <h2>{{cms.home.sections.sectionTwo.specialSubtitle}}</h2>
+    <h3 id="early-bird-counter">{{earlyBirdTimerD}} Days {{earlyBirdTimerH}}:{{earlyBirdTimerM}}:{{earlyBirdTimerZ}}{{earlyBirdTimerS}}</h3>
+    <div style="margin-left:10px;">
+      <!-- <span>Days</span><span>Hours</span><span style="margin-left:40px;">Minutes</span><span>Seconds</span> -->
+    </div>
+  </div>
+  <div class="early-bird-cta" ui-sref="services.coursesAvailable">{{cms.home.sections.sectionTwo.button}}</div>
+</section>
+
+<section class="home-page-about">
+  <p>{{cms.home.sections.sectionThree.title}}</p>
+  <h1>{{cms.home.sections.sectionThree.subtitle}}</h1>
+  <div class="home-why-choose">
+    <div class="why-choose-widgets">
+      <div id="icon-experiance" ></div>
+      <div id="icon-group" class="bg-img"></div>
+      <div id="icon-money" class="bg-img"></div>
+    </div>
+    <div class="why-choose-content">
+      <h2 ui-sref="about">{{cms.home.sections.sectionThree.widgets[1].w1.title}}</h2>
+      <p>{{cms.home.sections.sectionThree.widgets[1].w1.body}}</p>
+      <!-- <span>learn more</span> -->
+      <h2  ui-sref="about">{{cms.home.sections.sectionThree.widgets[1].w2.title}}</h2>
+      <p>{{cms.home.sections.sectionThree.widgets[1].w2.body}}</p>
+      <!-- <span>learn more</span> -->
+      <h2  ui-sref="about">{{cms.home.sections.sectionThree.widgets[1].w3.title}}</h2>
+      <p>{{cms.home.sections.sectionThree.widgets[1].w3.body}}</p>
+      <!-- <span>learn more</span> -->
+    </div>
+  </div>
+</section>
+
+<section class="para wrap1 parallax">
+  <div class="overlay-light">
+    <h1>Bring your business to new heights</h1>
+    <h2>We have some of the most advanced excel training programs in the region</h2>
+  </div>
+</section>
+
+<section class="para ">
+  <div class="para-white">
+    <h3>The best advice in life is free</h3>
+    <h2>check out our newsletter</h2>
+    <div class="cta-button-md" ui-sref="excelTips.subscribe">Sign Up Now</div>
+  </div>
+</section>

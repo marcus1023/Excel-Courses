@@ -7,6 +7,13 @@ angular.module('excelCourses' ).service('mainService', function($http, $q){
       data: data
     })
   }
+  this.deferPayment = function(data){
+    return $http({
+      method: 'POST',
+      url: "/api/deferPayment",
+      data: data
+    })
+  }
   this.addToSubscript = function(data){
     return $http({
       method: 'POST',
@@ -41,6 +48,13 @@ this.cmsConnect = function(){
     url: "/api/cmsConnect"
   })
 }
+this.holyshit = function(data){
+  return $http({
+    method: 'POST',
+    url: "/api/holyshit",
+    data:data
+  })
+}
 this.saveCms = function(newCms){
   return $http({
     method: 'POST',
@@ -51,6 +65,35 @@ this.saveCms = function(newCms){
 
 
 //student control
+this.getClassSize = function(data){
+  var defer = $q.defer();
+   $http({
+    method: 'POST',
+    url: "/api/getClassSize",
+    data: data
+  }).then(function(res){
+    let numberStudents = 10 - (res.data[0].students.length)
+    defer.resolve(numberStudents)
+    })
+  return defer.promise
+}
+this.getClassClient = function(){
+  var defer = $q.defer();
+   $http({
+    method: 'GET',
+    url: "/api/getClassClient"
+  }).then(function(res){
+    defer.resolve(res)
+    })
+  return defer.promise
+}
+this.addEBspecial = function(data){
+  return $http({
+      method: 'POST',
+      url: "/api/addEBspecial",
+      data: data
+    })
+}
 this.getAllStudents = function(){
   var defer = $q.defer();
    $http({
@@ -196,6 +239,14 @@ this.sendRegisteredEmail = function(Mail){
   return $http({
     method: 'POST',
     url: "/api/sendRegisteredEmail",
+    data: Mail
+  })
+}
+this.sendDeferPaymentEmail = function(Mail){
+  console.log("got to service")
+  return $http({
+    method: 'POST',
+    url: "/api/sendDeferPaymentEmail",
     data: Mail
   })
 }

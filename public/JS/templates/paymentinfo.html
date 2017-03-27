@@ -17,7 +17,7 @@
     <section class="payment-termsCheck">
       <input id="termsCheck" type="checkbox" ng-click="termsOfService('Agree')"/><p>I agree to the <span ui-sref="paymentInfo.terms">Terms Of Service</span></p>
     </section>
-    <div class="cta-button-md" ng-hide="currentClient.paymentReady !== true && currentClient.termsAgreed !== true" ui-sref="checkout">Continue to checkout</div>
+    <div class="cta-button-md" ng-hide="currentClient.paymentReady !== true || currentClient.termsAgreed !== true" ui-sref="checkout">Continue to checkout</div>
   </section>
   <section class="payment-dash">
     <div class="payment-cart">

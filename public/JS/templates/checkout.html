@@ -16,6 +16,16 @@
       </select>
       <div class="cta-button-sm" ng-click="addPeopleToClass(addPeople.number)">Add People</div>
     </div>
+    <div ng-hide="currentClient.earlyBird !== true" style=" border-bottom: 1px solid #52B529;" >
+      <p>You qualify for an early bird discount!</p>
+      <div class="cta-button-sm" ng-controller="checkout" ng-click="addEBspecial()">Add Early Bird Discount </div>
+    </div>
+    <div class="voucher-input" ng-hide="currentClient.earlyBird !== true" style=" border-bottom: 1px solid #52B529;">
+      <p>Voucher Code</p>
+      <input  />
+      <div class="cta-button-sm" ng-controller="checkout" ng-click="voucherControll()">Add Voucher Discount</div>
+    </div>
+    <div class="cta-button" ng-hide="numberStudents > 5" ng-controller="checkout">There are currently {{numberStudents}} more spots available in your class</div>
   </section>
   <section class="payment-dash checkout-summary">
     <div class="payment-cart">
@@ -50,9 +60,8 @@
     <div id="check" class="grey-scale">Check / Bank Transfer</div>
   </section>
   <section class="payment-methods" ng-hide="activateButtons !== true">
-    <!-- <div id="paypal" class="">Paypal</div> -->
-    <div id="paypal-button" ></div>
-    <div id="customButton" >Credit Card</div>
-    <div id="check" class="">Check / Bank Transfer</div>
+    <div id="paypal-button" ng-controller="paypal" ng-click="deferPayment('false')"></div>
+    <div id="customButton" ng-click="deferPayment('false')">Credit Card</div>
+    <div id="check" ui-sref="customerReportDeferPay" ng-click="deferPayment('true')">Check / Bank Transfer</div>
   </section>
 </section>

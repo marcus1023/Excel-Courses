@@ -10,7 +10,9 @@ var db = app.get('db');
 module.exports = {
   cmsConnect: function(req, res){
     db.getCms( function (err, result) {
-      res.send(result[0].cms)
+      if(result){
+        res.send(result[0].cms)
+      }
     })
   },
   saveCms: function(req, res){

@@ -1,0 +1,17 @@
+<section class="customerReportWrap">
+  <h2>Hey There! Thanks for your purchase!</h2>
+  <p>Looks like you have chosen to pay with either a bank transfer or check, here is some info that will help you complete the payment process.</p>
+  <p>Also, remember that you place in the class is not reserved untill paymant is recieved</p>
+  <h2>All cheque payments must be crossed and made payable to Excel infinity .  Please indicate the invoice number at the back of the cheque.  You can mail thischeque to MY ADDRESS.</h2>
+  <h2>For bank transfer, please make the payment to BANK NAME Current Account xxxx.</h2>
+  <p>This message has been sent to your email:</p>
+  <div>
+    <h4>Account Info</h4>
+    <p>Name: {{currentClient.info.pasportName}}<b></b></p>
+    <p>Customer Id: {{currentClient.userid}}<b></b></p>
+    <p>Payment Made: No<b></b></p>
+    <p>Payment Ammount: ${{currentClient.fullPayment}}<b></b></p>
+    <p>Course Id: {{currentClient.info.cohort}}<b></b></p>
+    <p>Course Dates: {{clientCohort.datebeauty}} - {{clientCohort.datebeauty2}}<b></b></p>
+  </div>
+</section>

@@ -6,6 +6,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/home-tmpl.html",
           controller: "mainController"
       })
+      .state('home2',{
+          url:'/home2',
+          templateUrl: "./JS/templates/home-tmpl2.html",
+          controller: "mainController"
+      })
       .state('home.select',{
           url:'/select',
           templateUrl: "./JS/templates/popups/selections-pop.html",
@@ -143,6 +148,11 @@ angular.module('excelCourses',  ['ui.router'])
           templateUrl: "./JS/templates/CustomerReport.html",
           controller: "customerReport"
       })
+      .state("customerReportDeferPay",{
+          url:'/customerReportDeferPay',
+          templateUrl: "./JS/templates/customerReportDeferPay.html",
+          controller: "customerReport"
+      })
       .state("courseManagement.student",{
           url:'/student',
           templateUrl: "./JS/templates/popups/studentReport.html",
@@ -157,6 +167,6 @@ angular.module('excelCourses',  ['ui.router'])
 
 
         $urlRouterProvider
-        .when('/', '/home')
+        .when('/', '/home2')
             .otherwise('/');
     });

@@ -14,32 +14,37 @@ module.exports = {
     })
   },
   confirmCohort: function (req, res) {
-    req.session.client.fullPayment = req.body.fullPayment
+    req.session.client.fullPayment = req.body.payment
+    console.log('req.session.client.fullPayment',req.session.client.fullPayment)
     let data = req.body;
     let cohort = data.cohort;
     let id = '{'+ data.id +'}';
     let name = '{'+ req.body.name + ":" +data.id +'}';
     let studentId = data.id;
-    db.updatePayment([studentId,req.session.client.fullPayment ], function (err, result) {
-      console.log(err,result)
+    db.updatePayment([studentId,req.session.client.fullPayment ], function (err, result){
     })
     db.getCohortList([cohort], function (err, result) {
-      let studentsArr = result[0].students;
-      if(studentsArr){
-        if(studentsArr.indexOf(studentId) !== -1){
-           res.send("User already in cohort!")
-        }else{
-          db.confirmCohort([id,cohort], function (err, result) {
-            console.log(err,result)
-          })
-          db.confirmCohortName([name,cohort], function (err, result) {
-            console.log(err,result)
-            res.send("User put in cohort!")
-          })
+      if(result[0].students !== null){
+        let studentsArr = result[0].students;
+        if(studentsArr){
+          if(studentsArr.indexOf(studentId) !== -1){
+             res.send("User already in cohort!")
+          }else{
+            db.confirmCohort([id,cohort], function (err, result) {
+            })
+            db.confirmCohortName([name,cohort], function (err, result) {
+            })
+          }
         }
+      }else{
+        db.confirmCohort([id,cohort], function (err, result) {
+        })
+        db.confirmCohortName([name,cohort], function (err, result) {
+        })
       }
     })
   },
+
   addPeopleToClass: function (req, res) {
     let cohort = req.body.cohort
     let number = req.body.number
@@ -50,10 +55,10 @@ module.exports = {
       req.session.client.purchaseType.push({ type: 'Excel Course', price: 600, id: 1 })
       req.session.client.savingsType.push({ type: 'Extra Student', price: -50 })
       db.confirmCohort([id,cohort], function (err, result) {
-        console.log(err,result)
+
       })
       db.addChildren([id,req.body.userid], function (err, result) {
-        console.log(err,result)
+
       })
     }
     res.send(req.session.client)
@@ -84,6 +89,13 @@ module.exports = {
   connectUser: function (req, res) {
     res.send(req.session.user)
   },
+  holyshit: function (req, res) {
+    let id = req.body.id
+    db.getAmmountJex([id],function(err,result){
+      console.log(err,result)
+      res.send(result[0])
+    })
+  },
   runningTotal: function (req, res) {
     if(!req.session.client){
       req.session.client = {}
@@ -93,6 +105,20 @@ module.exports = {
     }
     res.send(req.session.client)
   },
+  addEBspecial: function(req,res){
+    let ebDiscount = req.body.ebSpecial
+    let ebRecorder = 0
+    for( let i =0; i < req.session.client.savingsType.length; i++){
+      if(req.session.client.savingsType[i].type === 'Early Bird Special'){
+        ebRecorder = 1
+      }
+    }
+    if(ebRecorder !== 1){
+        req.session.client.savingsType.push({type:'Early Bird Special', price:ebDiscount})
+    }
+    res.send(req.session.client)
+  },
+
   purchaseType: function (req, res) {
     if(!req.session.client){
       req.session.client = {}
@@ -117,8 +143,12 @@ module.exports = {
     }
 
     //create savings array and logic
-    req.session.client.savingsType = []
-    req.session.client.savingsTypeLog = []
+    if(!req.session.client.savingsType){
+      req.session.client.savingsType = []
+    }
+    if(!req.session.client.savingsTypeLog){
+      req.session.client.savingsTypeLog = []
+    }
     savingsArrFunct = function(){
       let mentoringCashe = 0
       let consultancyCashe = 0
@@ -154,7 +184,6 @@ module.exports = {
     let phone = data.phone
     let birthDate = data.birthDate
     let cohort = data.cohort
-    console.log(cohort)
     let type = 'client'
     if(!req.session.client){
       req.session.client = {}
@@ -162,7 +191,7 @@ module.exports = {
     req.session.client.info = data;
     req.session.client.paymentReady = true;
     db.newClient([pasport, pasportName,preferName, email, address, postalCode, phone,birthDate,type,cohort, 0 ], function (err, result) {
-      console.log(err,result)
+
       db.getuserfromuser([preferName], function (err, result) {
         req.session.client.userid = result[0].id
         res.send(req.session.client)
@@ -177,6 +206,7 @@ module.exports = {
     res.send(req.session.client)
   },
   getClient: function (req, res) {
+  //  console.log('req.session.client.fullPayment',req.session.client.fullPayment)
     res.send(req.session.client)
   },
   createEvent: function (req, res) {
@@ -204,15 +234,17 @@ module.exports = {
       let eventCalc = []
       let eventCalcShow = []
       let earlyBirdCalc = []
-      for(let i = 0; i < result.length; i++){
-        if(result[i].coursedate > unxDate){
-          eventCalc.push(result[i])
-        }
-        if(result[i].coursedate > (unxDate + 2629743)){
-          earlyBirdCalc.push(result[i].coursedate)
-        }
-        if(result[i].students === null || result[i].students.length < 9){
-          eventCalcShow.push(result[i])
+      if(result){
+        for(let i = 0; i < result.length; i++){
+          if(result[i].coursedate > unxDate){
+            eventCalc.push(result[i])
+          }
+          if(result[i].coursedate > (unxDate + 2629743)){
+            earlyBirdCalc.push(result[i].coursedate)
+          }
+          if(result[i].students === null || result[i].students.length < 9){
+            eventCalcShow.push(result[i])
+          }
         }
       }
       let newEBArr = earlyBirdCalc.sort()
@@ -255,21 +287,36 @@ module.exports = {
   },
 
   // GET ALL  STUDENTS
+  getClassClient: function (req, res) {
+    let data = req.session.client
+    res.send(data)
+  },
   getAllStudents: function (req, res) {
     db.getAllStudents(function(err,result){
       res.send(result)
       })
   },
+  getClassSize: function (req, res) {
+    let cohort = req.body.cohort
+    db.getClassSize([cohort],function(err,result){
+
+      res.send(result)
+      })
+  },
+  deferPayment: function (req, res) {
+    req.session.client.deferPayment = req.body.deferPayment
+    res.send(req.session.client.deferPayment)
+  },
   confirmPayment: function (req, res) {
-    console.log("confirm",req.body)
+
     let id = req.body.id
     let refId = "{"+req.body.id+"}"
     let course = req.body.course
     db.confirmPayment([id, 1],function(err,result){
-      console.log(result,err)
+
     })
     db.updateStudentsConfirmed([course, refId],function(err,result){
-      console.log(result,err)
+
     })
   }
 }
